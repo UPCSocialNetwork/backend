@@ -13,7 +13,7 @@ const update: RequestHandler = async (req, res) => {
   } catch (e) { res.send({ message: e }); };
 
   res.send({
-    message: 'Updated',
+    message: 'Clonned Centre',
     CentreUniversitari: centreUniversitari.toJSON()
   });
 };
