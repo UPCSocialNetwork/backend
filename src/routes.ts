@@ -2,6 +2,7 @@ import { Router } from 'express';
 import swaggerUi from 'swagger-ui-express';
 import apiSpec from '../openapi.json';
 
+import * as CentreUniversitariController from './controllers/CentreUniversitari';
 import * as BookController from './controllers/book';
 
 const swaggerUiOptions = {
@@ -9,6 +10,13 @@ const swaggerUiOptions = {
 };
 
 const router = Router();
+
+// CentreUniversitari rutes
+router.post('/Centre/add', CentreUniversitariController.add);
+router.get('/Centre/getAll', CentreUniversitariController.getAll);
+router.get('/Centre/getOne', CentreUniversitariController.getOne);
+router.put('/Centre/update', CentreUniversitariController.update);
+router.delete('/Centre/delete', CentreUniversitariController.deleteCentre);
 
 // Book routes
 router.post('/book/add', BookController.add);

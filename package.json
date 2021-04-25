@@ -1,7 +1,7 @@
 {
-  "name": "express-typescript-boilerplate",
+  "name": "backend",
   "version": "1.0.0",
-  "description": "A minimalist TypeScript-Express boilerplate",
+  "description": "TypeScript-Express boilerplate",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sidhantpanda/express-typescript-boilerplate.git"
@@ -13,7 +13,7 @@
     "boilerplate",
     "eslint"
   ],
-  "author": "Sidhant Panda",
+  "author": "----",
   "main": "dist/index.js",
   "scripts": {
     "eslint": "eslint src/server.ts",
