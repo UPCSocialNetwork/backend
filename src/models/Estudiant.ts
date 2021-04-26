@@ -25,9 +25,14 @@ export interface IEstudiant extends ITimeStampedDocument {
 interface IEstudiantModel extends Model<IEstudiant> { }
 
 const schema = new Schema<IEstudiant>({
-  nomComplet: { type: String, index: true, required: true },
-  nomSigles: { type: String, index: true, required: true },
-  localitzacio: { type: String, required: true }
+  nomComplet: { type: String, required: true },
+  mail: { type: String, index: true, required: true },
+  contrasenya: { type: String, required: true },
+  descripcio: { type: String, required: true },
+  mentorID: { type: String, required: true },
+  LlistaAssignatures: { type: Array, required: true },
+  LlistaXatGrupTancat: { type: Array, required: true }
+
 });
 
 // Add timestamp plugin for createdAt and updatedAt in miliseconds from epoch
