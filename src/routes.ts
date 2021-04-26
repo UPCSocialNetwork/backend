@@ -11,7 +11,7 @@ const swaggerUiOptions = {
 
 const router = Router();
 
-// CentreUniversitari rutes
+// CentreUniversitari rutess
 router.post('/Centre/add', CentreUniversitariController.add);
 router.get('/Centre/getAll', CentreUniversitariController.getAll);
 router.get('/Centre/getOne', CentreUniversitariController.getOne);
