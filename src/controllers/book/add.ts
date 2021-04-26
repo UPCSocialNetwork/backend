@@ -8,6 +8,7 @@ export const addBookSchema = Joi.object().keys({
   author: Joi.string().required()
 });
 
+// add a new book
 const add: RequestHandler = async (req, res) => {
   const { name, author } = req.body;
 
