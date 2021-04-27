@@ -4,6 +4,8 @@ import apiSpec from '../openapi.json';
 
 import * as CentreUniversitariController from './controllers/CentreUniversitari';
 import * as BookController from './controllers/book';
+import * as GrauController from './controllers/Grau';
+import Grau from './models/Grau';
 
 const swaggerUiOptions = {
   customCss: '.swagger-ui .topbar { display: none }'
@@ -17,6 +19,14 @@ router.get('/Centre/getAll', CentreUniversitariController.getAll);
 router.get('/Centre/getOne', CentreUniversitariController.getOne);
 router.put('/Centre/update', CentreUniversitariController.update);
 router.delete('/Centre/delete', CentreUniversitariController.deleteCentre);
+
+// Grau rutes
+router.post('/grau/add', GrauController.add);
+router.get('/grau/getAll', GrauController.getAll);
+router.get('/grau/getOne', GrauController.getOne);
+router.put('/grau/update', GrauController.update);
+router.delete('/grau/delete', GrauController.deleteGrau);
+
 
 // Book routes
 router.post('/book/add', BookController.add);
