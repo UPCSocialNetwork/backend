@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 /* eslint-disable import/first */
 import dotenv from 'dotenv';
 
@@ -28,6 +29,7 @@ if (process.env.NODE_ENV === 'development') {
 const safeMongooseConnection = new SafeMongooseConnection({
   mongoUrl: process.env.MONGO_URL,
   debugCallback,
+  isConnected: false,
   onStartConnection: mongoUrl => logger.info(`Connecting to MongoDB at ${mongoUrl}`),
   onConnectionError: (error, mongoUrl) => logger.log({
     level: 'error',
@@ -42,9 +44,14 @@ const serve = () => app.listen(PORT, () => {
 
   if (process.env.NODE_ENV === 'development') {
     // This route is only present in development mode
-    logger.debug(`⚙️  Swagger UI hosted at http://localhost:${PORT}/dev/api-docs`);
+    logger.debug(`⚙️ Swagger UI hosted at http://localhost:${PORT}/dev/api-docs`);
   }
 });
+
+const inputDBdata = () => {
+  while (!safeMongooseConnection.getConnectionStatus());
+  logger.debug(`Inserting data on the DB because mongo = ${safeMongooseConnection.getConnectionStatus()}`);
+};
 
 if (process.env.MONGO_URL == null) {
   logger.error('MONGO_URL not specified in environment');
@@ -53,6 +60,7 @@ if (process.env.MONGO_URL == null) {
   safeMongooseConnection.connect(mongoUrl => {
     logger.info(`Connected to MongoDB at ${mongoUrl}`);
     serve();
+    inputDBdata();
   });
 }
 

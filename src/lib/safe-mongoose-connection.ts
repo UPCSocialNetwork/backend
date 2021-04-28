@@ -7,6 +7,7 @@ interface IOnConnectedCallback {
 
 interface SafeMongooseConnectionOptions {
   mongoUrl: string;
+  isConnected: boolean;
   mongooseConnectionOptions?: ConnectionOptions;
   retryDelayMs?: number
   debugCallback?: (collectionName: string, method: string, query: any, doc: string) => void;
@@ -81,6 +82,10 @@ export default class SafeMongooseConnection {
     mongoose.connection.close(force, onClosed);
   }
 
+  public getConnectionStatus() {
+    return this.options.isConnected;
+  }
+
   /** Start mongo connection */
   public connect(onConnectedCallback: IOnConnectedCallback) {
     this.onConnectedCallback = onConnectedCallback;
@@ -99,11 +104,13 @@ export default class SafeMongooseConnection {
    */
   private onConnected = () => {
     this.isConnectedBefore = true;
+    this.options.isConnected = true;
     this.onConnectedCallback(this.options.mongoUrl);
   };
 
   /** Handler called when mongo gets re-connected to the database */
   private onReconnected = () => {
+    this.options.isConnected = true;
     this.onConnectedCallback(this.options.mongoUrl);
   };
 
@@ -117,6 +124,7 @@ export default class SafeMongooseConnection {
 
   /** Handler called when mongo connection is lost */
   private onDisconnected = () => {
+    this.options.isConnected = true;
     if (!this.isConnectedBefore && !this.shouldCloseConnection) {
       this.connectionTimeout = setTimeout(() => {
         this.startConnection();
