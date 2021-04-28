@@ -6,7 +6,7 @@ import TimeStampPlugin, {
 } from './plugins/timestamp-plugin';
 
 export interface ICentreUniversitari extends ITimeStampedDocument {
-  /** Name of the CentreUniversitari */
+  /** Nom del CentreUniversitari */
   nomComplet: string;
   /** Sigles CentreUniversitari */
   nomSigles: string;
@@ -17,7 +17,7 @@ export interface ICentreUniversitari extends ITimeStampedDocument {
 interface ICentreUniversitariModel extends Model<ICentreUniversitari> { }
 
 const schema = new Schema<ICentreUniversitari>({
-  nomComplet: { type: String, index: true, required: true },
+  nomComplet: { type: String, required: true },
   nomSigles: { type: String, index: true, required: true },
   localitzacio: { type: String, required: true }
 });
