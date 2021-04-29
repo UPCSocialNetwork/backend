@@ -16,6 +16,8 @@ export interface IEstudiant extends ITimeStampedDocument {
   descripcio: string;
   /** Identificador del mentor de l'Estudiant */
   mentorID: string;
+  /** Llistat d'interessos de l'Estudiant */
+  interessos: Array<string>
   /** FK d'Assignatura */
   LlistaAssignatures: Array<string>;
   /** Llistat de Grups tancats del que es admin*/
@@ -32,6 +34,7 @@ const schema = new Schema<IEstudiant>({
   contrasenya: { type: String, required: true },
   descripcio: { type: String, required: true },
   mentorID: { type: String, unique: true, required: true },
+  interessos: { type: Array },
   LlistaAssignatures: { type: Array, required: true },
   LlistaXatGrupTancat: { type: Array, required: true }
 

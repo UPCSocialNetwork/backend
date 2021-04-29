@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { RequestHandler } from 'express';
 import Joi from '@hapi/joi';
 import requestMiddleware from '../../middleware/request-middleware';
@@ -9,17 +10,18 @@ export const addEstudiantSchema = Joi.object().keys({
   contrasenya: Joi.string().required(),
   descripcio: Joi.string().required(),
   mentorID: Joi.string().required(),
+  interessos: Joi.array(),
   LlistaAssignatures: Joi.array().required(),
   LlistaXatGrupTancat: Joi.array().required()
 });
 
 const add: RequestHandler = async (req, res) => {
   const {
-    nomComplet, mail, contrasenya, descripcio, mentorID, LlistaAssignatures, LlistaXatGrupTancat
+    nomComplet, mail, contrasenya, descripcio, mentorID, interessos, LlistaAssignatures, LlistaXatGrupTancat
   } = req.body;
 
   const estudiant = new Estudiant({
-    nomComplet, mail, contrasenya, descripcio, mentorID, LlistaAssignatures, LlistaXatGrupTancat
+    nomComplet, mail, contrasenya, descripcio, mentorID, interessos, LlistaAssignatures, LlistaXatGrupTancat
   });
   try {
     await estudiant.save();

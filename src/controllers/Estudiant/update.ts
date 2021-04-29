@@ -4,10 +4,10 @@ import requestMiddleware from '../../middleware/request-middleware';
 import Estudiant, { IEstudiant } from '../../models/Estudiant';
 import { addEstudiantSchema } from './add';
 
-// Error: se duplica el centro
+// Error: modificar para que las que no se coloquen no se borren [EJ: interessos].
 const update: RequestHandler = async (req, res) => {
   const {
-    nomComplet, mail, contrasenya, descripcio, mentorID, LlistaAssignatures, LlistaXatGrupTancat
+    nomComplet, mail, contrasenya, descripcio, mentorID, interessos, LlistaAssignatures, LlistaXatGrupTancat
   } = req.body;
   let estudiant: IEstudiant = null;
   try {
@@ -17,6 +17,7 @@ const update: RequestHandler = async (req, res) => {
     estudiant.contrasenya = contrasenya;
     estudiant.descripcio = descripcio;
     estudiant.mentorID = mentorID;
+    estudiant.interessos = interessos;
     estudiant.LlistaAssignatures = LlistaAssignatures;
     estudiant.LlistaXatGrupTancat = LlistaXatGrupTancat;
     await estudiant.save();
