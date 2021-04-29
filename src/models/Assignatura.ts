@@ -21,8 +21,10 @@ export interface IAssignatura extends ITimeStampedDocument {
 interface IAssignaturaModel extends Model<IAssignatura> { }
 
 const schema = new Schema<IAssignatura>({
-  nomComplet: { type: String, required: true },
-  nomSigles: { type: String, index: true, required: true },
+  nomComplet: { type: String, unique: true, required: true },
+  nomSigles: {
+    type: String, index: true, unique: true, required: true
+  },
   quadrimestre: { type: String, required: true },
   credits: { type: String, required: true },
   grauID: { type: String, required: true },

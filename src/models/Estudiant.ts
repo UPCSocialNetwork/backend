@@ -31,7 +31,7 @@ const schema = new Schema<IEstudiant>({
   },
   contrasenya: { type: String, required: true },
   descripcio: { type: String, required: true },
-  mentorID: { type: String, required: true },
+  mentorID: { type: String, unique: true, required: true },
   LlistaAssignatures: { type: Array, required: true },
   LlistaXatGrupTancat: { type: Array, required: true }
 
