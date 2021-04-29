@@ -9,21 +9,17 @@ const update: RequestHandler = async (req, res) => {
   let grau : IGrau = null;
   try {
     grau = await Grau.findOne({ nom });
+    grau.nom = nom;
+    grau.credits = credits;
+    grau.centreUniversitariID = centreUniversitariID;
+    grau.save();
     //await grau.save();
-  } catch (e) { res.send({ message: e }); };
-  if (!grau){
-    res.send({
-      message: 'Grau not found'
-    });
-  } else {
-    await Grau.findByIdAndDelete(grau._id);
-    const nouGrau = new Grau({ nom, credits, centreUniversitariID });
-    await nouGrau.save();
-    res.send({
-      message: 'Grau updated',
-      Grau: nouGrau.toJSON()
-    });
-  }
+  } catch (e) { return res.send({ message: e }); };
+  if (!grau) return res.send({ message: 'Grau not found' });
+  return res.send({
+    message: 'Updated Grau',
+    Grau: grau.toJSON()
+  });
 };
 
 export default requestMiddleware(update, { validation: { body: addGrauSchema } });
