@@ -7,9 +7,9 @@ const all: RequestHandler = async (req, res) => {
   try {
     grau = await Grau.find();
   } catch (e) {
-    res.send({ message: e });
+    return res.send({ message: e });
   };
-  res.send({ grau });
+  return res.send({ grau });
 };
 
 export default requestMiddleware(all);

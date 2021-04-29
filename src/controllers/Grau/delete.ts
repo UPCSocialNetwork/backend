@@ -14,12 +14,12 @@ const deleteGrau: RequestHandler = async (req, res) => {
   try {
     grau = await Grau.findOne({ nom });
   } catch (e) {
-    res.send({ e });
+    return res.send({ e });
   };
   try {
     await Grau.findByIdAndDelete(grau._id);
-  } catch (e) { res.send({ message: e }); }
-  res.send(
+  } catch (e) { return res.send({ message: e }); }
+  return res.send(
     { message: 'Grau deleted Successfully!' }
   );
 };

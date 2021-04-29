@@ -16,12 +16,12 @@ const add: RequestHandler = async (req, res) => {
   try {
     await grau.save();
   } catch (e) {
-    res.send({
+    return res.send({
       message: e
     });
   };
 
-  res.send({
+  return res.send({
     message: 'Saved',
     Grau: grau.toJSON()
   });
