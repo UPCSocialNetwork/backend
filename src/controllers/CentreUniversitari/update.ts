@@ -1,20 +1,24 @@
+/* eslint-disable max-len */
 import { RequestHandler } from 'express';
 import requestMiddleware from '../../middleware/request-middleware';
-import CentreUniversitari from '../../models/CentreUniversitari';
+import CentreUniversitari, { ICentreUniversitari } from '../../models/CentreUniversitari';
 import { addCentreUniversitariSchema } from './add';
 
 // Error: se duplica el centro
 const update: RequestHandler = async (req, res) => {
   const { nomComplet, nomSigles, localitzacio } = req.body;
-
-  const centreUniversitari = new CentreUniversitari({ nomComplet, nomSigles, localitzacio });
+  let centre: ICentreUniversitari = null;
   try {
-    await centreUniversitari.save();
-  } catch (e) { res.send({ message: e }); };
-
-  res.send({
-    message: 'Clonned Centre',
-    CentreUniversitari: centreUniversitari.toJSON()
+    centre = await CentreUniversitari.findOne({ nomSigles });
+    centre.nomComplet = nomComplet;
+    centre.nomSigles = nomSigles;
+    centre.localitzacio = localitzacio;
+    centre.save();
+  } catch (e) { return res.send({ message: e }); };
+  if (!centre) return res.send({ message: 'CentreUniversitari not found' });
+  return res.send({
+    message: 'Updated Centre',
+    CentreUniversitari: centre.toJSON()
   });
 };
 

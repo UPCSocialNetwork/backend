@@ -1,15 +1,15 @@
 import { RequestHandler } from 'express';
 import requestMiddleware from '../../middleware/request-middleware';
-import CentreUniversitari from '../../models/CentreUniversitari';
+import Estudiant from '../../models/Estudiant';
 
 const all: RequestHandler = async (req, res) => {
-  let centreUniversitari = null;
+  let estudiant = null;
   try {
-    centreUniversitari = await CentreUniversitari.find();
+    estudiant = await Estudiant.find();
   } catch (e) {
     return res.send({ message: e });
   };
-  return res.send({ centreUniversitari });
+  return res.send({ estudiant });
 };
 
 export default requestMiddleware(all);

@@ -16,12 +16,12 @@ const add: RequestHandler = async (req, res) => {
   try {
     await centreUniversitari.save();
   } catch (e) {
-    res.send({
+    return res.send({
       message: e
     });
   };
 
-  res.send({
+  return res.send({
     message: 'Saved',
     CentreUniversitari: centreUniversitari.toJSON()
   });

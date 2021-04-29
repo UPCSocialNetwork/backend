@@ -3,9 +3,10 @@ import swaggerUi from 'swagger-ui-express';
 import apiSpec from '../openapi.json';
 
 import * as CentreUniversitariController from './controllers/CentreUniversitari';
+import * as AssignaturaController from './controllers/Assignatura';
+import * as EstudiantController from './controllers/Estudiant';
 import * as BookController from './controllers/book';
 import * as GrauController from './controllers/Grau';
-import Grau from './models/Grau';
 
 const swaggerUiOptions = {
   customCss: '.swagger-ui .topbar { display: none }'
@@ -27,6 +28,19 @@ router.get('/grau/getOne', GrauController.getOne);
 router.put('/grau/update', GrauController.update);
 router.delete('/grau/delete', GrauController.deleteGrau);
 
+// Assignatura rutes
+router.post('/Assignatura/add', AssignaturaController.add);
+router.get('/Assignatura/getAll', AssignaturaController.getAll);
+router.get('/Assignatura/getOne', AssignaturaController.getOne);
+router.put('/Assignatura/update', AssignaturaController.update);
+router.delete('/Assignatura/delete', AssignaturaController.deleteAssignatura);
+
+// Estudiant rutes
+router.post('/Estudiant/add', EstudiantController.add);
+router.get('/Estudiant/getAll', EstudiantController.getAll);
+router.get('/Estudiant/getOne', EstudiantController.getOne);
+router.put('/Estudiant/update', EstudiantController.update);
+router.delete('/Estudiant/delete', EstudiantController.deleteEstudiant);
 
 // Book routes
 router.post('/book/add', BookController.add);
