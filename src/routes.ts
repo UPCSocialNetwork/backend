@@ -6,6 +6,7 @@ import * as CentreUniversitariController from './controllers/CentreUniversitari'
 import * as AssignaturaController from './controllers/Assignatura';
 import * as EstudiantController from './controllers/Estudiant';
 import * as BookController from './controllers/book';
+import * as GrauController from './controllers/Grau';
 
 const swaggerUiOptions = {
   customCss: '.swagger-ui .topbar { display: none }'
@@ -19,6 +20,13 @@ router.get('/Centre/getAll', CentreUniversitariController.getAll);
 router.get('/Centre/getOne', CentreUniversitariController.getOne);
 router.put('/Centre/update', CentreUniversitariController.update);
 router.delete('/Centre/delete', CentreUniversitariController.deleteCentre);
+
+// Grau rutes
+router.post('/grau/add', GrauController.add);
+router.get('/grau/getAll', GrauController.getAll);
+router.get('/grau/getOne', GrauController.getOne);
+router.put('/grau/update', GrauController.update);
+router.delete('/grau/delete', GrauController.deleteGrau);
 
 // Assignatura rutes
 router.post('/Assignatura/add', AssignaturaController.add);
