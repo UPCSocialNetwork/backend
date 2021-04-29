@@ -14,9 +14,9 @@ const update: RequestHandler = async (req, res) => {
     centre.nomSigles = nomSigles;
     centre.localitzacio = localitzacio;
     centre.save();
-  } catch (e) { res.send({ message: e }); };
-  if (!centre) res.send({ message: 'CentreUniversitari not found' });
-  res.send({
+  } catch (e) { return res.send({ message: e }); };
+  if (!centre) return res.send({ message: 'CentreUniversitari not found' });
+  return res.send({
     message: 'Updated Centre',
     CentreUniversitari: centre.toJSON()
   });

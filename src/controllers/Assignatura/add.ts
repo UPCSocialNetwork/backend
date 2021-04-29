@@ -17,19 +17,18 @@ const add: RequestHandler = async (req, res) => {
   const {
     nomComplet, nomSigles, quadrimestre, credits, grauID, xatAssignaturaID, LlistaEstudiants
   } = req.body;
-
   const assignatura = new Assignatura({
     nomComplet, nomSigles, quadrimestre, credits, grauID, xatAssignaturaID, LlistaEstudiants
   });
   try {
     await assignatura.save();
   } catch (e) {
-    res.send({
+    return res.send({
       message: e
     });
   };
 
-  res.send({
+  return res.send({
     message: 'Saved',
     Assignatura: assignatura.toJSON()
   });

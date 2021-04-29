@@ -20,9 +20,9 @@ const update: RequestHandler = async (req, res) => {
     estudiant.LlistaAssignatures = LlistaAssignatures;
     estudiant.LlistaXatGrupTancat = LlistaXatGrupTancat;
     estudiant.save();
-  } catch (e) { res.send({ message: e }); };
-  if (!estudiant) res.send({ message: 'Estudiant not found' });
-  res.send({
+  } catch (e) { return res.send({ message: e }); };
+  if (!estudiant) return res.send({ message: 'Estudiant not found' });
+  return res.send({
     message: 'Updated Centre',
     Estudiant: estudiant.toJSON()
   });

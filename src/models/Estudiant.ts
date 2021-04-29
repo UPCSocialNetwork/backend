@@ -26,7 +26,9 @@ interface IEstudiantModel extends Model<IEstudiant> { }
 
 const schema = new Schema<IEstudiant>({
   nomComplet: { type: String, required: true },
-  mail: { type: String, index: true, required: true },
+  mail: {
+    type: String, index: true, unique: true, required: true
+  },
   contrasenya: { type: String, required: true },
   descripcio: { type: String, required: true },
   mentorID: { type: String, required: true },

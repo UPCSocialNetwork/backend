@@ -19,9 +19,9 @@ const update: RequestHandler = async (req, res) => {
     assignatura.xatAssignaturaID = xatAssignaturaID;
     assignatura.LlistaEstudiants = LlistaEstudiants;
     assignatura.save();
-  } catch (e) { res.send({ message: e }); };
-  if (!assignatura) res.send({ message: 'Assignatura not found' });
-  res.send({
+  } catch (e) { return res.send({ message: e }); };
+  if (!assignatura) return res.send({ message: 'Assignatura not found' });
+  return res.send({
     message: 'Updated Assignatura',
     Assignatura: assignatura.toJSON()
   });

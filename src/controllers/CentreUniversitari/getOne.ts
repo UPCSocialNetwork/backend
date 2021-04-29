@@ -8,7 +8,7 @@ const getOne: RequestHandler = async (req, res) => {
   try {
     centreUniversitari = await CentreUniversitari.findOne({ nomSigles });
   } catch (e) {
-    res.send({ e });
+    return res.send({ e });
   };
   if (!centreUniversitari) return res.send({ message: 'CentreUniversitari not found' });
   return res.send({ centreUniversitari });
