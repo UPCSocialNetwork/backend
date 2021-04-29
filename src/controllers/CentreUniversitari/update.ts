@@ -13,7 +13,7 @@ const update: RequestHandler = async (req, res) => {
     centre.nomComplet = nomComplet;
     centre.nomSigles = nomSigles;
     centre.localitzacio = localitzacio;
-    centre.save();
+    await centre.save();
   } catch (e) { return res.send({ message: e }); };
   if (!centre) return res.send({ message: 'CentreUniversitari not found' });
   return res.send({

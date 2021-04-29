@@ -19,7 +19,7 @@ const update: RequestHandler = async (req, res) => {
     estudiant.mentorID = mentorID;
     estudiant.LlistaAssignatures = LlistaAssignatures;
     estudiant.LlistaXatGrupTancat = LlistaXatGrupTancat;
-    estudiant.save();
+    await estudiant.save();
   } catch (e) { return res.send({ message: e }); };
   if (!estudiant) return res.send({ message: 'Estudiant not found' });
   return res.send({

@@ -18,7 +18,7 @@ const update: RequestHandler = async (req, res) => {
     assignatura.grauID = grauID;
     assignatura.xatAssignaturaID = xatAssignaturaID;
     assignatura.LlistaEstudiants = LlistaEstudiants;
-    assignatura.save();
+    await assignatura.save();
   } catch (e) { return res.send({ message: e }); };
   if (!assignatura) return res.send({ message: 'Assignatura not found' });
   return res.send({

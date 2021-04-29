@@ -12,8 +12,7 @@ const update: RequestHandler = async (req, res) => {
     grau.nom = nom;
     grau.credits = credits;
     grau.centreUniversitariID = centreUniversitariID;
-    grau.save();
-    //await grau.save();
+    await grau.save();
   } catch (e) { return res.send({ message: e }); };
   if (!grau) return res.send({ message: 'Grau not found' });
   return res.send({
