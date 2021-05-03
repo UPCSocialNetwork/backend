@@ -7,6 +7,10 @@ import * as AssignaturaController from './controllers/Assignatura';
 import * as EstudiantController from './controllers/Estudiant';
 import * as BookController from './controllers/book';
 import * as GrauController from './controllers/Grau';
+import * as CursadaController from './controllers/Cursada';
+import * as ParticipantController from './controllers/Participant';
+import * as MissatgeController from './controllers/Missatge';
+import * as EnquestaController from './controllers/Enquesta';
 
 const swaggerUiOptions = {
   customCss: '.swagger-ui .topbar { display: none }'
@@ -27,6 +31,34 @@ router.get('/grau/getAll', GrauController.getAll);
 router.get('/grau/getOne', GrauController.getOne);
 router.put('/grau/update', GrauController.update);
 router.delete('/grau/delete', GrauController.deleteGrau);
+
+// Cursada rutes
+router.post('/cursada/add', CursadaController.add);
+router.get('/cursada/getAll', CursadaController.getAll);
+router.get('/cursada/getOne', CursadaController.getOne);
+router.put('/cursada/update', CursadaController.update);
+router.delete('/cursada/delete', CursadaController.deleteCursada);
+
+// Participant rutes
+router.post('/participant/add', ParticipantController.add);
+router.get('/participant/getAll', ParticipantController.getAll);
+router.get('/participant/getOne', ParticipantController.getOne);
+router.put('/participant/update', ParticipantController.update);
+router.delete('/participant/delete', ParticipantController.deleteParticipant);
+
+// Missatge rutes
+router.post('/missatge/add', MissatgeController.add);
+router.get('/missatge/getAll', MissatgeController.getAll);
+router.get('/missatge/getOne', MissatgeController.getOne);
+router.put('/missatge/update', MissatgeController.update);
+router.delete('/missatge/delete', MissatgeController.deleteMissatge);
+
+// Enquesta rutes
+router.post('/enquesta/add', EnquestaController.add);
+router.get('/enquesta/getAll', EnquestaController.getAll);
+router.get('/enquesta/getOne', EnquestaController.getOne);
+router.put('/enquesta/update', EnquestaController.update);
+router.delete('/enquesta/delete', EnquestaController.deleteEnquesta);
 
 // Assignatura rutes
 router.post('/Assignatura/add', AssignaturaController.add);
