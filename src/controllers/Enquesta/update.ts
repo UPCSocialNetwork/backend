@@ -1,9 +1,17 @@
 import { RequestHandler } from 'express';
 import requestMiddleware from '../../middleware/request-middleware';
 import Enquesta, { IEnquesta } from '../../models/Enquesta';
-import { addEnquestaSchema } from './add';
+const Joi = require('@hapi/joi')
+Joi.objectId = require('joi-objectid')(Joi)
 
-// Error: se duplica el centro
+export const updateEnquestaSchema = Joi.object().keys({
+  _id: Joi.objectId().required(),
+  titol: Joi.string().required(),
+  descripcio: Joi.string().required(),
+  llistaOpcions: Joi.string().required(),
+  xatID: Joi.string().required()
+});
+
 const update: RequestHandler = async (req, res) => {
   const { _id, titol, descripcio, llistaOpcions, xatID } = req.body;
   let enquesta : IEnquesta = null;
@@ -22,4 +30,4 @@ const update: RequestHandler = async (req, res) => {
   });
 };
 
-export default requestMiddleware(update, { validation: { body: addEnquestaSchema } });
+export default requestMiddleware(update, { validation: { body: updateEnquestaSchema } });
