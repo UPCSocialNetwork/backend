@@ -1,13 +1,11 @@
-/* eslint-disable max-len */
 import { RequestHandler } from 'express';
 import requestMiddleware from '../../middleware/request-middleware';
 import Estudiant, { IEstudiant } from '../../models/Estudiant';
 import { addEstudiantSchema } from './add';
 
-// Error: se duplica el centro
 const update: RequestHandler = async (req, res) => {
   const {
-    nomComplet, mail, contrasenya, descripcio, mentorID, LlistaAssignatures, LlistaXatGrupTancat
+    nomComplet, mail, contrasenya, descripcio, mentorID, interessos, LlistaAssignatures, LlistaXatGrupTancat
   } = req.body;
   let estudiant: IEstudiant = null;
   try {
@@ -17,13 +15,14 @@ const update: RequestHandler = async (req, res) => {
     estudiant.contrasenya = contrasenya;
     estudiant.descripcio = descripcio;
     estudiant.mentorID = mentorID;
+    estudiant.interessos = interessos;
     estudiant.LlistaAssignatures = LlistaAssignatures;
     estudiant.LlistaXatGrupTancat = LlistaXatGrupTancat;
-    estudiant.save();
-  } catch (e) { res.send({ message: e }); };
-  if (!estudiant) res.send({ message: 'Estudiant not found' });
-  res.send({
-    message: 'Updated Centre',
+    await estudiant.save();
+  } catch (e) { return res.send({ message: e }); };
+  if (!estudiant) return res.send({ message: 'Estudiant not found' });
+  return res.send({
+    message: 'Updated Estudiant',
     Estudiant: estudiant.toJSON()
   });
 };

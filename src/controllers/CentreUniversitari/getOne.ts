@@ -1,6 +1,7 @@
 import { RequestHandler } from 'express';
 import requestMiddleware from '../../middleware/request-middleware';
 import CentreUniversitari, { ICentreUniversitari } from '../../models/CentreUniversitari';
+import { deleteCentreUniversitariSchema } from './delete';
 
 const getOne: RequestHandler = async (req, res) => {
   const { nomSigles } = req.body;
@@ -8,10 +9,10 @@ const getOne: RequestHandler = async (req, res) => {
   try {
     centreUniversitari = await CentreUniversitari.findOne({ nomSigles });
   } catch (e) {
-    res.send({ e });
+    return res.send({ e });
   };
   if (!centreUniversitari) return res.send({ message: 'CentreUniversitari not found' });
   return res.send({ centreUniversitari });
 };
 
-export default requestMiddleware(getOne);
+export default requestMiddleware(getOne, { validation: { body: deleteCentreUniversitariSchema } });

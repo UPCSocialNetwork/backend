@@ -7,9 +7,9 @@ const all: RequestHandler = async (req, res) => {
   try {
     centreUniversitari = await CentreUniversitari.find();
   } catch (e) {
-    res.send({ message: e });
+    return res.send({ message: e });
   };
-  res.send({ centreUniversitari });
+  return res.send({ centreUniversitari });
 };
 
 export default requestMiddleware(all);

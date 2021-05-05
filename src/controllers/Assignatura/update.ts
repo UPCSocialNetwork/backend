@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { RequestHandler } from 'express';
 import requestMiddleware from '../../middleware/request-middleware';
 import Assignatura, { IAssignatura } from '../../models/Assignatura';
@@ -18,10 +17,10 @@ const update: RequestHandler = async (req, res) => {
     assignatura.grauID = grauID;
     assignatura.xatAssignaturaID = xatAssignaturaID;
     assignatura.LlistaEstudiants = LlistaEstudiants;
-    assignatura.save();
-  } catch (e) { res.send({ message: e }); };
-  if (!assignatura) res.send({ message: 'Assignatura not found' });
-  res.send({
+    await assignatura.save();
+  } catch (e) { return res.send({ message: e }); };
+  if (!assignatura) return res.send({ message: 'Assignatura not found' });
+  return res.send({
     message: 'Updated Assignatura',
     Assignatura: assignatura.toJSON()
   });

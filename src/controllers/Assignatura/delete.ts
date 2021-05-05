@@ -14,12 +14,12 @@ const deleteCentre: RequestHandler = async (req, res) => {
   try {
     assignatura = await Assignatura.findOne({ nomSigles });
   } catch (e) {
-    res.send({ e });
+    return res.send({ e });
   };
   try {
     await Assignatura.findByIdAndDelete(assignatura._id);
-  } catch (e) { res.send({ message: e }); }
-  res.send(
+  } catch (e) { return res.send({ message: e }); }
+  return res.send(
     { message: 'Assignatura deleted Successfully!' }
   );
 };

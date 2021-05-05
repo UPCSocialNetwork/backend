@@ -9,25 +9,26 @@ export const addEstudiantSchema = Joi.object().keys({
   contrasenya: Joi.string().required(),
   descripcio: Joi.string().required(),
   mentorID: Joi.string().required(),
+  interessos: Joi.array(),
   LlistaAssignatures: Joi.array().required(),
   LlistaXatGrupTancat: Joi.array().required()
 });
 
 const add: RequestHandler = async (req, res) => {
   const {
-    nomComplet, mail, contrasenya, descripcio, mentorID, LlistaAssignatures, LlistaXatGrupTancat
+    nomComplet, mail, contrasenya, descripcio, mentorID, interessos, LlistaAssignatures, LlistaXatGrupTancat
   } = req.body;
 
   const estudiant = new Estudiant({
-    nomComplet, mail, contrasenya, descripcio, mentorID, LlistaAssignatures, LlistaXatGrupTancat
+    nomComplet, mail, contrasenya, descripcio, mentorID, interessos, LlistaAssignatures, LlistaXatGrupTancat
   });
   try {
     await estudiant.save();
   } catch (e) {
-    res.send({ message: e });
+    return res.send({ message: e });
   };
 
-  res.send({
+  return res.send({
     message: 'Saved',
     Estudiant: estudiant.toJSON()
   });
