@@ -1,11 +1,10 @@
-/* eslint-disable max-len */
 import Joi from '@hapi/joi';
 import { RequestHandler } from 'express';
 import requestMiddleware from '../../middleware/request-middleware';
 import Estudiant, { IEstudiant } from '../../models/Estudiant';
 
 export const deleteEstudiantSchema = Joi.object().keys({
-  nomSigles: Joi.string().required()
+  mail: Joi.string().required()
 });
 
 const deleteCentre: RequestHandler = async (req, res) => {

@@ -1,10 +1,8 @@
-/* eslint-disable max-len */
 import { RequestHandler } from 'express';
 import requestMiddleware from '../../middleware/request-middleware';
 import Estudiant, { IEstudiant } from '../../models/Estudiant';
 import { addEstudiantSchema } from './add';
 
-// Error: modificar para que las que no se coloquen no se borren [EJ: interessos].
 const update: RequestHandler = async (req, res) => {
   const {
     nomComplet, mail, contrasenya, descripcio, mentorID, interessos, LlistaAssignatures, LlistaXatGrupTancat
@@ -24,7 +22,7 @@ const update: RequestHandler = async (req, res) => {
   } catch (e) { return res.send({ message: e }); };
   if (!estudiant) return res.send({ message: 'Estudiant not found' });
   return res.send({
-    message: 'Updated Centre',
+    message: 'Updated Estudiant',
     Estudiant: estudiant.toJSON()
   });
 };

@@ -19,11 +19,11 @@ const swaggerUiOptions = {
 const router = Router();
 
 // CentreUniversitari rutes
-router.post('/Centre/add', CentreUniversitariController.add);
-router.get('/Centre/getAll', CentreUniversitariController.getAll);
-router.get('/Centre/getOne', CentreUniversitariController.getOne);
-router.put('/Centre/update', CentreUniversitariController.update);
-router.delete('/Centre/delete', CentreUniversitariController.deleteCentre);
+router.post('/centre/add', CentreUniversitariController.add);
+router.get('/centre/getAll', CentreUniversitariController.getAll);
+router.get('/centre/getOne', CentreUniversitariController.getOne);
+router.put('/centre/update', CentreUniversitariController.update);
+router.delete('/centre/delete', CentreUniversitariController.deleteCentre);
 
 // Grau rutes
 router.post('/grau/add', GrauController.add);
@@ -61,18 +61,18 @@ router.put('/enquesta/update', EnquestaController.update);
 router.delete('/enquesta/delete', EnquestaController.deleteEnquesta);
 
 // Assignatura rutes
-router.post('/Assignatura/add', AssignaturaController.add);
-router.get('/Assignatura/getAll', AssignaturaController.getAll);
-router.get('/Assignatura/getOne', AssignaturaController.getOne);
-router.put('/Assignatura/update', AssignaturaController.update);
-router.delete('/Assignatura/delete', AssignaturaController.deleteAssignatura);
+router.post('/assignatura/add', AssignaturaController.add);
+router.get('/assignatura/getAll', AssignaturaController.getAll);
+router.get('/assignatura/getOne', AssignaturaController.getOne);
+router.put('/assignatura/update', AssignaturaController.update);
+router.delete('/assignatura/delete', AssignaturaController.deleteAssignatura);
 
 // Estudiant rutes
-router.post('/Estudiant/add', EstudiantController.add);
-router.get('/Estudiant/getAll', EstudiantController.getAll);
-router.get('/Estudiant/getOne', EstudiantController.getOne);
-router.put('/Estudiant/update', EstudiantController.update);
-router.delete('/Estudiant/delete', EstudiantController.deleteEstudiant);
+router.post('/estudiant/add', EstudiantController.add);
+router.get('/estudiant/getAll', EstudiantController.getAll);
+router.get('/estudiant/getOne', EstudiantController.getOne);
+router.put('/estudiant/update', EstudiantController.update);
+router.delete('/estudiant/delete', EstudiantController.deleteEstudiant);
 
 // Book routes
 router.post('/book/add', BookController.add);

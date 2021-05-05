@@ -6,13 +6,14 @@ import Enquesta from '../../models/Enquesta';
 export const addEnquestaSchema = Joi.object().keys({
   titol: Joi.string().required(),
   descripcio: Joi.string().required(),
-  llistaOpcions: Joi.string().required(),
+  temps: Joi.number().required(),
+  llistaOpcions: Joi.array().required(),
   xatID: Joi.string().required()
 });
 
 const add: RequestHandler = async (req, res) => {
-  const { titol, descripcio, llistaOpcions, xatID } = req.body;
-  const enquesta = new Enquesta({ titol, descripcio, llistaOpcions, xatID });
+  const { titol, descripcio, temps, llistaOpcions, xatID } = req.body;
+  const enquesta = new Enquesta({ titol, descripcio, temps, llistaOpcions, xatID });
   try {
     await enquesta.save();
   } catch (e) {
@@ -23,7 +24,7 @@ const add: RequestHandler = async (req, res) => {
 
   return res.send({
     message: 'Saved',
-    Grau: enquesta.toJSON()
+    Enquesta: enquesta.toJSON()
   });
 };
 
