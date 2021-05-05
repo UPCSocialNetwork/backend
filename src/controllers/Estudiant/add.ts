@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { RequestHandler } from 'express';
 import Joi from '@hapi/joi';
 import requestMiddleware from '../../middleware/request-middleware';

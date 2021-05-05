@@ -1,6 +1,7 @@
 import { RequestHandler } from 'express';
 import requestMiddleware from '../../middleware/request-middleware';
 import Cursada, { ICursada } from '../../models/Cursada';
+import { deleteCursadaSchema } from './delete';
 
 const getOne: RequestHandler = async (req, res) => {
   const { estudiantID, assignaturaID } = req.body;
@@ -14,4 +15,4 @@ const getOne: RequestHandler = async (req, res) => {
   return res.send({ cursada });
 };
 
-export default requestMiddleware(getOne);
+export default requestMiddleware(getOne, { validation: { body: deleteCursadaSchema } });

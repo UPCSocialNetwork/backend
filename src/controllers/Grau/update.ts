@@ -3,7 +3,6 @@ import requestMiddleware from '../../middleware/request-middleware';
 import Grau, { IGrau } from '../../models/Grau';
 import { addGrauSchema } from './add';
 
-// Error: se duplica el centro
 const update: RequestHandler = async (req, res) => {
   const { nom, credits, centreUniversitariID } = req.body;
   let grau : IGrau = null;

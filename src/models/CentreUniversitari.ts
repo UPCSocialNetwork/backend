@@ -18,9 +18,7 @@ interface ICentreUniversitariModel extends Model<ICentreUniversitari> { }
 
 const schema = new Schema<ICentreUniversitari>({
   nomComplet: { type: String, unique: true, required: true },
-  nomSigles: {
-    type: String, index: true, unique: true, required: true
-  },
+  nomSigles: { type: String, index: true, unique: true, required: true },
   localitzacio: { type: String, required: true }
 });
 

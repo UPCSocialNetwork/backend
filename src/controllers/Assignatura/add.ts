@@ -6,8 +6,8 @@ import Assignatura from '../../models/Assignatura';
 export const addAssignaturaSchema = Joi.object().keys({
   nomComplet: Joi.string().required(),
   nomSigles: Joi.string().required(),
-  quadrimestre: Joi.string().required(),
-  credits: Joi.string().required(),
+  quadrimestre: Joi.number().required(),
+  credits: Joi.number().required(),
   grauID: Joi.string().required(),
   xatAssignaturaID: Joi.string().required(),
   LlistaEstudiants: Joi.array().required()

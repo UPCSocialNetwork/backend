@@ -4,15 +4,14 @@ import requestMiddleware from '../../middleware/request-middleware';
 import Missatge from '../../models/Missatge';
 
 export const addMissatgeSchema = Joi.object().keys({
-  estudiantID: Joi.string().required(),
-  xatID: Joi.string().required(),
-  text: Joi.string().required()
+  text: Joi.string().required(),
+  participantID: Joi.string().required()
 });
 
 const add: RequestHandler = async (req, res) => {
-  const { estudiantID, xatID, text } = req.body;
+  const { text, participantID } = req.body;
 
-  const missatge = new Missatge({ estudiantID, xatID, text });
+  const missatge = new Missatge({ text, participantID });
   try {
     await missatge.save();
   } catch (e) {

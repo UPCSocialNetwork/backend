@@ -10,8 +10,10 @@ import {
       titol: string;
       /** Descripció de l'enquesta */
       descripcio: string;
+      /** Temps */
+      temps: number;
       /** Llista d'opcions de l'enquesta */
-      llistaOpcions: string;
+      llistaOpcions: Array<string>;
       /** FK ID del xat */
       xatID: string;
     }
@@ -21,7 +23,8 @@ import {
   const schema = new Schema<IEnquesta>({
     titol: { type: String, required: true },
     descripcio: { type: String, required: true },
-    llistaOpcions: { type: String, required: true }, 
+    temps: { type: Number, required: true },
+    llistaOpcions: { type: Array, required: true },
     xatID: { type: String, required: true }
   });
   

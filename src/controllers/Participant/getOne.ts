@@ -10,7 +10,7 @@ const getOne: RequestHandler = async (req, res) => {
   } catch (e) {
     return res.send({ e });
   };
-  if (!participant) return res.send({ message: 'Assignatura no participant' });
+  if (!participant) return res.send({ message: 'No es troba el participant' });
   return res.send({ participant });
 };
 

@@ -3,7 +3,6 @@ import requestMiddleware from '../../middleware/request-middleware';
 import Participant, { IParticipant } from '../../models/Participant';
 import { addParticipantSchema } from './add';
 
-// Error: se duplica el centro
 const update: RequestHandler = async (req, res) => {
   const { estudiantID, xatID, ultimaLectura, notificacions, bloqueigGrup } = req.body;
   let participant : IParticipant = null;
