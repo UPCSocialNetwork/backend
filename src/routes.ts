@@ -5,8 +5,10 @@ import apiSpec from '../openapi.json';
 import * as CentreUniversitariController from './controllers/CentreUniversitari';
 import * as AssignaturaController from './controllers/Assignatura';
 import * as EstudiantController from './controllers/Estudiant';
-import * as BookController from './controllers/book';
 import * as GrauController from './controllers/Grau';
+import * as XatGrupal from './controllers/XatGrupal';
+import * as XatMentor from './controllers/XatMentor';
+import * as XatGrupTancat from './controllers/XatGrupTancat';
 import * as CursadaController from './controllers/Cursada';
 import * as ParticipantController from './controllers/Participant';
 import * as MissatgeController from './controllers/Missatge';
@@ -74,10 +76,33 @@ router.get('/estudiant/getOne', EstudiantController.getOne);
 router.put('/estudiant/update', EstudiantController.update);
 router.delete('/estudiant/delete', EstudiantController.deleteEstudiant);
 
-// Book routes
-router.post('/book/add', BookController.add);
-router.get('/book/all', BookController.all);
-router.get('/book/search', BookController.search);
+// Xat rutes
+router.post('/Xat', XatGrupal.add);
+router.get('/Xat', XatGrupal.getAll);
+router.get('/Xat/:id', XatGrupal.getOne);
+router.put('/Xat/:id', XatGrupal.update);
+router.delete('/Xat/:id', XatGrupal.deleteXatGrupal);
+
+// XatGrupal rutes
+router.post('/XatGrupal', XatGrupal.add);
+router.get('/XatGrupal', XatGrupal.getAll);
+router.get('/XatGrupal/:id', XatGrupal.getOne);
+router.put('/XatGrupal/:id', XatGrupal.update);
+router.delete('/XatGrupal/:id', XatGrupal.deleteXatGrupal);
+
+// XatMentor rutes
+router.post('/XatMentor', XatMentor.add);
+router.get('/XatMentor', XatMentor.getAll);
+router.get('/XatMentor/:id', XatMentor.getOne);
+router.put('/XatMentor/:id', XatMentor.update);
+router.delete('/XatMentor/:id', XatMentor.deleteXatMentor);
+
+// XatGrupTancat rutes
+router.post('/XatGrupTancat', XatGrupTancat.add);
+router.get('/XatGrupTancat', XatGrupTancat.getAll);
+router.get('/XatGrupTancat/:id', XatGrupTancat.getOne);
+router.put('/XatGrupTancat/:id', XatGrupTancat.update);
+router.delete('/XatGrupTancat/:id', XatGrupTancat.deleteXatGrupTancat);
 
 // Dev routes
 if (process.env.NODE_ENV === 'development') {
