@@ -1,25 +1,37 @@
 /* eslint-disable max-len */
 import { RequestHandler } from 'express';
 import requestMiddleware from '../../middleware/request-middleware';
-import CentreUniversitari, { ICentreUniversitari } from '../../models/CentreUniversitari';
-import { addXatGrupalSchema } from './add';
+import XatGrupal, { IXatGrupal } from '../../models/XatGrupal';
 
-// Error: se duplica el centro
+const Joi = require('@hapi/joi');
+Joi.objectId = require('joi-objectid')(Joi);
+
+export const updateXatGrupalSchema = Joi.object().keys({
+  titol: Joi.string().required(),
+  descripcio: Joi.string().required(),
+  imatge: Joi.string().required(),
+  ultimMissatge: Joi.string().required()
+});
+
 const update: RequestHandler = async (req, res) => {
-  const { nomComplet, nomSigles, localitzacio } = req.body;
-  let centre: ICentreUniversitari = null;
+  const { id } = req.params;
+  const {
+    titol, descripcio, imatge, ultimMissatge
+  } = req.body;
+  let xatGrupal: IXatGrupal = null;
   try {
-    centre = await CentreUniversitari.findOne({ nomSigles });
-    centre.nomComplet = nomComplet;
-    centre.nomSigles = nomSigles;
-    centre.localitzacio = localitzacio;
-    await centre.save();
+    xatGrupal = await XatGrupal.findById({ _id: id });
+    xatGrupal.titol = titol;
+    xatGrupal.descripcio = descripcio;
+    xatGrupal.imatge = imatge;
+    xatGrupal.ultimMissatge = ultimMissatge;
+    await xatGrupal.save();
   } catch (e) { return res.send({ message: e }); };
-  if (!centre) return res.send({ message: 'CentreUniversitari not found' });
+  if (!xatGrupal) return res.send({ message: 'XatGrupal not found' });
   return res.send({
-    message: 'Updated Centre',
-    CentreUniversitari: centre.toJSON()
+    message: 'Updated XatGrupal',
+    XatGrupal: xatGrupal.toJSON()
   });
 };
 
-export default requestMiddleware(update, { validation: { body: addXatGrupalSchema } });
+export default requestMiddleware(update, { validation: { body: updateXatGrupalSchema } });

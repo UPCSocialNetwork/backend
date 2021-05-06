@@ -1,21 +1,15 @@
-/* eslint-disable max-len */
-import Joi from '@hapi/joi';
 import { RequestHandler } from 'express';
 import requestMiddleware from '../../middleware/request-middleware';
 import Xat from '../../models/Xat';
 
-export const deleteXatSchema = Joi.object().keys({
-  xatID: Joi.string().required()
-});
-
 const deleteXat: RequestHandler = async (req, res) => {
-  const { xatID } = req.body;
+  const { id } = req.params;
   try {
-    await Xat.findByIdAndDelete(xatID);
-  } catch (e) { return res.send({ message: e }); }
+    await Xat.findByIdAndDelete({ _id: id });
+  } catch (error) { return res.send({ message: error }); }
   return res.send(
     { message: 'Xat deleted Successfully!' }
   );
 };
 
-export default requestMiddleware(deleteXat, { validation: { body: deleteXatSchema } });
+export default requestMiddleware(deleteXat);

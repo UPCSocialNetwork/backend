@@ -1,25 +1,29 @@
 /* eslint-disable max-len */
 import { RequestHandler } from 'express';
 import requestMiddleware from '../../middleware/request-middleware';
-import CentreUniversitari, { ICentreUniversitari } from '../../models/CentreUniversitari';
-import { addCentreUniversitariSchema } from './add';
+import Xat, { IXat } from '../../models/Xat';
 
-// Error: se duplica el centro
+const Joi = require('@hapi/joi');
+Joi.objectId = require('joi-objectid')(Joi);
+
+export const updateXatSchema = Joi.object().keys({
+  ultimMissatge: Joi.string().required()
+});
+
 const update: RequestHandler = async (req, res) => {
-  const { nomComplet, nomSigles, localitzacio } = req.body;
-  let centre: ICentreUniversitari = null;
+  const { id } = req.params;
+  const { ultimMissatge } = req.body;
+  let xat: IXat = null;
   try {
-    centre = await CentreUniversitari.findOne({ nomSigles });
-    centre.nomComplet = nomComplet;
-    centre.nomSigles = nomSigles;
-    centre.localitzacio = localitzacio;
-    await centre.save();
+    xat = await Xat.findById({ _id: id });
+    xat.ultimMissatge = ultimMissatge;
+    await xat.save();
   } catch (e) { return res.send({ message: e }); };
-  if (!centre) return res.send({ message: 'CentreUniversitari not found' });
+  if (!xat) return res.send({ message: 'Xat not found' });
   return res.send({
-    message: 'Updated Centre',
-    CentreUniversitari: centre.toJSON()
+    message: 'Updated Xat',
+    Xat: xat.toJSON()
   });
 };
 
-export default requestMiddleware(update, { validation: { body: addCentreUniversitariSchema } });
+export default requestMiddleware(update, { validation: { body: updateXatSchema } });

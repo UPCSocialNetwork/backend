@@ -1,15 +1,15 @@
 import { RequestHandler } from 'express';
 import requestMiddleware from '../../middleware/request-middleware';
-import CentreUniversitari from '../../models/CentreUniversitari';
+import Xat from '../../models/Xat';
 
 const all: RequestHandler = async (req, res) => {
-  let centreUniversitari = null;
+  let xat = null;
   try {
-    centreUniversitari = await CentreUniversitari.find();
+    xat = await Xat.find();
   } catch (e) {
     return res.send({ message: e });
   };
-  return res.send({ centreUniversitari });
+  return res.send({ xat });
 };
 
 export default requestMiddleware(all);

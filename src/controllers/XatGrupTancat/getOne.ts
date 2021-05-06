@@ -1,17 +1,17 @@
 import { RequestHandler } from 'express';
 import requestMiddleware from '../../middleware/request-middleware';
-import XatGrupal, { IXatGrupal } from '../../models/XatGrupal';
+import XatGrupTancat, { IXatGrupTancat } from '../../models/XatGrupTancat';
 
 const getOne: RequestHandler = async (req, res) => {
   const { id } = req.params;
-  let xatGrupal: IXatGrupal = null;
+  let xatGrupTancat: IXatGrupTancat = null;
   try {
-    xatGrupal = await XatGrupal.findById({ _id: id });
+    xatGrupTancat = await XatGrupTancat.findById({ _id: id });
   } catch (error) {
     return res.send({ error });
   };
-  if (!xatGrupal) return res.send({ message: 'XatGrupal not found' });
-  return res.send({ xatGrupal });
+  if (!xatGrupTancat) return res.send({ message: 'XatGrupTancat not found' });
+  return res.send({ xatGrupTancat });
 };
 
 export default requestMiddleware(getOne);

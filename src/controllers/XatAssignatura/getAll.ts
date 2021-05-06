@@ -1,15 +1,15 @@
 import { RequestHandler } from 'express';
 import requestMiddleware from '../../middleware/request-middleware';
-import XatGrupal from '../../models/XatGrupal';
+import XatAssignatura from '../../models/XatAssignatura';
 
 const all: RequestHandler = async (req, res) => {
-  let xatGrupal = null;
+  let xatAssignatura = null;
   try {
-    xatGrupal = await XatGrupal.find();
+    xatAssignatura = await XatAssignatura.find();
   } catch (e) {
     return res.send({ message: e });
   };
-  return res.send({ xatGrupal });
+  return res.send({ xatAssignatura });
 };
 
 export default requestMiddleware(all);

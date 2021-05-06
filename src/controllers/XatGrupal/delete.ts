@@ -1,21 +1,15 @@
-/* eslint-disable max-len */
-import Joi from '@hapi/joi';
 import { RequestHandler } from 'express';
 import requestMiddleware from '../../middleware/request-middleware';
 import XatGrupal from '../../models/XatGrupal';
 
-export const deleteXatGrupalSchema = Joi.object().keys({
-  xatGrupalID: Joi.string().required()
-});
-
 const deleteXatGrupal: RequestHandler = async (req, res) => {
-  const { xatGrupalID } = req.body;
+  const { id } = req.params;
   try {
-    await XatGrupal.findByIdAndDelete(xatGrupalID);
-  } catch (e) { return res.send({ message: e }); }
+    await XatGrupal.findByIdAndDelete({ _id: id });
+  } catch (error) { return res.send({ message: error }); }
   return res.send(
     { message: 'XatGrupal deleted Successfully!' }
   );
 };
 
-export default requestMiddleware(deleteXatGrupal, { validation: { body: deleteXatGrupalSchema } });
+export default requestMiddleware(deleteXatGrupal);

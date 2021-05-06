@@ -1,17 +1,17 @@
 import { RequestHandler } from 'express';
 import requestMiddleware from '../../middleware/request-middleware';
-import CentreUniversitari, { ICentreUniversitari } from '../../models/CentreUniversitari';
+import Xat, { IXat } from '../../models/Xat';
 
 const getOne: RequestHandler = async (req, res) => {
-  const { nomSigles } = req.body;
-  let centreUniversitari: ICentreUniversitari = null;
+  const { id } = req.params;
+  let xat: IXat = null;
   try {
-    centreUniversitari = await CentreUniversitari.findOne({ nomSigles });
-  } catch (e) {
-    return res.send({ e });
+    xat = await Xat.findById({ _id: id });
+  } catch (error) {
+    return res.send({ error });
   };
-  if (!centreUniversitari) return res.send({ message: 'CentreUniversitari not found' });
-  return res.send({ centreUniversitari });
+  if (!xat) return res.send({ message: 'Xat not found' });
+  return res.send({ xat });
 };
 
 export default requestMiddleware(getOne);
