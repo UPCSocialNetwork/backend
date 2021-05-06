@@ -1,6 +1,7 @@
 import { RequestHandler } from 'express';
 import requestMiddleware from '../../middleware/request-middleware';
 import Grau, { IGrau } from '../../models/Grau';
+import { deleteGrauSchema } from './delete';
 
 const getOne: RequestHandler = async (req, res) => {
   const { nom } = req.body;
@@ -14,4 +15,4 @@ const getOne: RequestHandler = async (req, res) => {
   return res.send({ grau });
 };
 
-export default requestMiddleware(getOne);
+export default requestMiddleware(getOne, { validation: { body: deleteGrauSchema } });
