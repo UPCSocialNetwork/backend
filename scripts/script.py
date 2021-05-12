@@ -1,0 +1,81 @@
+import MySQLdb
+import json
+import collections
+from pymongo import MongoClient
+
+# Connexió a la base de dades
+db = MySQLdb.connect(host="147.83.250.104",
+                     user="xarxasocial",
+                     passwd="toh4ib9zoGaic3aiph",
+                     db="xarxasocial",
+                     charset="utf8")
+cur = db.cursor()
+
+# Petició: 
+cur.execute("SELECT nom_catala,sigles,poblacio FROM vw_unitats_estructurals_340 WHERE sigles = 'EPSEVG';")
+
+objects_list = []
+for row in cur.fetchall():
+    c=collections.OrderedDict()
+    c["nomComplet"]=row[0]
+    c["nomSigles"]=row[1]
+    c["localitzacio"]=row[2]
+    objects_list.append(c)
+
+centre = json.dumps(objects_list)
+f = open("centreData.json","w+")
+f.write(centre)
+
+# Petició:
+cur.execute("SELECT nom, credits_totals FROM vw_programes_340 WHERE CENTRE = 340 AND nivell = 08 AND estat_programa = 'Implantat';")
+
+objects_list = []
+for row in cur.fetchall():
+    g=collections.OrderedDict()
+    g["nom"]=row[0]
+    g["credits"]=row[1]
+    g["centreUniversitariID"]="EPSEVG"
+    objects_list.append(g)
+
+grau = json.dumps(objects_list)
+f = open("grauData.json","w+")
+f.write(grau)
+
+
+# Petició:
+cur.execute("SELECT DISTINCT ass.nom, ass.sigles_ud, ass.nivell, ass.credits, ass.tipus, pers.nom, pers.cognoms, pers.email, gr.nom FROM (((vw_unitats_docents_pro_340 ass INNER JOIN vw_programes_340 gr ON gr.codi_programa = ass.codi_programa AND estat_programa = 'Implantat' AND gr.nivell = 08) INNER JOIN vw_professor_ud_grup_340 prof ON ass.codi_upc_ud = prof.codi_upc_ud AND prof.curs = 2020) INNER JOIN vw_persones_340 pers ON prof.codi_persona = pers.codi_persona AND pers.email != '');")
+
+objects_list = []
+for row in cur.fetchall():
+    a=collections.OrderedDict()
+    if (len(row[1]) != 6):
+        a["nomComplet"]=row[0]
+        a["nomSigles"]=row[1].split('-')[0]
+        a["quadrimestre"]=row[2]
+        a["credits"]=row[3]
+        a["tipus"]=row[4]
+        a["nomProfessor"]=row[5]+" "+row[6]
+        a["mailProfessor"]=row[7]
+        a["grauID"]=row[8]
+        a["xatAssignaturaID"]=""
+        a["LlistaEstudiants"]=[]
+        objects_list.append(a)
+
+assig = json.dumps(objects_list)
+f = open("assigData.json","w+")
+f.write(assig)
+
+db.close()
+
+try:
+    conn = MongoClient('mongodb://host.docker.internal:27017/OnCampus')
+    print("Connected successfully!!!")
+except:  
+    print("Could not connect to MongoDB")
+db = conn.OnCampus
+centreCol = db.centreuniversitaris
+centreCol.insert_many(json.load(open('centreData.json')))
+grauCol = db.graus
+grauCol.insert_many(json.load(open('grauData.json')))
+assigCol = db.assignaturas
+assigCol.insert_many(json.load(open('assigData.json')))
