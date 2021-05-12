@@ -10,6 +10,10 @@ export interface IAssignatura extends ITimeStampedDocument {
   quadrimestre: number;
   /** Descripcio de l'Assignatura */
   credits: number;
+  /** Obligatòria o optativa */
+  tipus: string;
+  /** Mail del professor */
+  mailProfessor: Array<string>;
   /** FK de Grau */
   grauID: string;
   /** FK XatAssignatura */
@@ -21,17 +25,22 @@ export interface IAssignatura extends ITimeStampedDocument {
 interface IAssignaturaModel extends Model<IAssignatura> { }
 
 const schema = new Schema<IAssignatura>({
-  nomComplet: { type: String, unique: true, required: true },
-  nomSigles: { type: String, index: true, unique: true, required: true },
+  nomComplet: { type: String, required: true },
+  nomSigles: { type: String, required: true },
   quadrimestre: { type: Number, required: true },
   credits: { type: Number, required: true },
+  tipus: { type: String, required: true },
+  mailProfessor: { type: Array, required: true },
   grauID: { type: String, required: true },
   xatAssignaturaID: { type: String, required: true },
   LlistaEstudiants: { type: Array, required: true }
 });
 
+
+
 // Add timestamp plugin for createdAt and updatedAt in miliseconds from epoch
 schema.plugin(TimeStampPlugin);
+schema.index({ "nomComplet" : 1, "grauID" : 1 }, { "unique":true });
 
 const Assignatura: IAssignaturaModel = model<IAssignatura, IAssignaturaModel>('Assignatura', schema);
 

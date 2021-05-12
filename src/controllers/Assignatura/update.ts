@@ -5,15 +5,17 @@ import { addAssignaturaSchema } from './add';
 
 const update: RequestHandler = async (req, res) => {
   const {
-    nomComplet, nomSigles, quadrimestre, credits, grauID, xatAssignaturaID, LlistaEstudiants
+    nomComplet, nomSigles, quadrimestre, credits, tipus, mailProfessor, grauID, xatAssignaturaID, LlistaEstudiants
   } = req.body;
   let assignatura: IAssignatura = null;
   try {
-    assignatura = await Assignatura.findOne({ nomSigles });
+    assignatura = await Assignatura.findOne({ nomComplet, grauID });
     assignatura.nomComplet = nomComplet;
     assignatura.nomSigles = nomSigles;
     assignatura.quadrimestre = quadrimestre;
     assignatura.credits = credits;
+    assignatura.tipus = tipus;
+    assignatura.mailProfessor = mailProfessor;
     assignatura.grauID = grauID;
     assignatura.xatAssignaturaID = xatAssignaturaID;
     assignatura.LlistaEstudiants = LlistaEstudiants;

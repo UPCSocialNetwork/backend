@@ -43,7 +43,7 @@ f.write(grau)
 
 
 # Petició:
-cur.execute("SELECT DISTINCT ass.nom, ass.sigles_ud, ass.nivell, ass.credits, ass.tipus, pers.nom, pers.cognoms, pers.email, gr.nom FROM (((vw_unitats_docents_pro_340 ass INNER JOIN vw_programes_340 gr ON gr.codi_programa = ass.codi_programa AND estat_programa = 'Implantat' AND gr.nivell = 08) INNER JOIN vw_professor_ud_grup_340 prof ON ass.codi_upc_ud = prof.codi_upc_ud AND prof.curs = 2020) INNER JOIN vw_persones_340 pers ON prof.codi_persona = pers.codi_persona AND pers.email != '');")
+cur.execute("SELECT ass.nom, ass.sigles_ud, ass.nivell, ass.credits, ass.tipus, GROUP_CONCAT(DISTINCT pers.email order by pers.email SEPARATOR '; '), gr.nom FROM (((vw_unitats_docents_pro_340 ass INNER JOIN vw_programes_340 gr ON gr.codi_programa = ass.codi_programa AND estat_programa = 'Implantat' AND gr.nivell = 08) INNER JOIN vw_professor_ud_grup_340 prof ON ass.codi_upc_ud = prof.codi_upc_ud AND prof.curs = 2020) INNER JOIN vw_persones_340 pers ON prof.codi_persona = pers.codi_persona AND pers.email != '') group by ass.nom, gr.nom order by ass.nom, gr.nom;")
 
 objects_list = []
 for row in cur.fetchall():
@@ -54,9 +54,8 @@ for row in cur.fetchall():
         a["quadrimestre"]=row[2]
         a["credits"]=row[3]
         a["tipus"]=row[4]
-        a["nomProfessor"]=row[5]+" "+row[6]
-        a["mailProfessor"]=row[7]
-        a["grauID"]=row[8]
+        a["mailProfessor"]=row[5].split("; ")
+        a["grauID"]=row[6]
         a["xatAssignaturaID"]=""
         a["LlistaEstudiants"]=[]
         objects_list.append(a)

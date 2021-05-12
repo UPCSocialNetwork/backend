@@ -8,17 +8,17 @@ export const addAssignaturaSchema = Joi.object().keys({
   nomSigles: Joi.string().required(),
   quadrimestre: Joi.number().required(),
   credits: Joi.number().required(),
+  tipus: Joi.string().required(),
+  mailProfessor: Joi.array().required(),
   grauID: Joi.string().required(),
   xatAssignaturaID: Joi.string().required(),
   LlistaEstudiants: Joi.array().required()
 });
 
 const add: RequestHandler = async (req, res) => {
-  const {
-    nomComplet, nomSigles, quadrimestre, credits, grauID, xatAssignaturaID, LlistaEstudiants
-  } = req.body;
+  const { nomComplet, nomSigles, quadrimestre, credits, tipus, mailProfessor, grauID, xatAssignaturaID, LlistaEstudiants } = req.body;
   const assignatura = new Assignatura({
-    nomComplet, nomSigles, quadrimestre, credits, grauID, xatAssignaturaID, LlistaEstudiants
+    nomComplet, nomSigles, quadrimestre, credits, tipus, mailProfessor, grauID, xatAssignaturaID, LlistaEstudiants
   });
   try {
     await assignatura.save();
