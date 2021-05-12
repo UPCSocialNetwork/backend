@@ -1,15 +1,18 @@
 /* eslint-disable import/first */
 import dotenv from 'dotenv';
+import util from 'util';
+import app from './app';
+import SafeMongooseConnection from './lib/safe-mongoose-connection';
+import logger from './logger';
+
+const { spawn } = require('child_process');
+
+const script = spawn('python3', ['./scripts/script.py']);
 
 const result = dotenv.config();
 if (result.error) {
   dotenv.config({ path: '.env.default' });
 }
-
-import util from 'util';
-import app from './app';
-import SafeMongooseConnection from './lib/safe-mongoose-connection';
-import logger from './logger';
 
 const PORT = process.env.PORT || 3000;
 
@@ -52,6 +55,7 @@ if (process.env.MONGO_URL == null) {
 } else {
   safeMongooseConnection.connect(mongoUrl => {
     logger.info(`Connected to MongoDB at ${mongoUrl}`);
+    script.stdout.on('data', (data: { toString: () => any; }) => { });
     serve();
   });
 }

@@ -17,9 +17,7 @@ export interface IGrau extends ITimeStampedDocument {
   interface IGrauModel extends Model<IGrau> { }
 
 const schema = new Schema<IGrau>({
-  nom: {
-    type: String, index: true, unique: true, required: true
-  },
+  nom: { type: String, unique: true, required: true },
   credits: { type: Number, required: true },
   centreUniversitariID: { type: String, required: true }
 });
