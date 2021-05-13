@@ -18,7 +18,7 @@ export const addAssignaturaSchema = Joi.object().keys({
 
 const add: RequestHandler = async (req, res) => {
   const {
-    nomComplet, nomSigles, quadrimestre, credits, tipus, mailProfessor, grauID, xatAssignaturaID, LlistaEstudiants 
+    nomComplet, nomSigles, quadrimestre, credits, tipus, mailProfessor, grauID, xatAssignaturaID, LlistaEstudiants
   } = req.body;
   const assignatura = new Assignatura({
     nomComplet, nomSigles, quadrimestre, credits, tipus, mailProfessor, grauID, xatAssignaturaID, LlistaEstudiants
