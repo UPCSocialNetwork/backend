@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { RequestHandler } from 'express';
 import requestMiddleware from '../../middleware/request-middleware';
 import Assignatura, { IAssignatura } from '../../models/Assignatura';

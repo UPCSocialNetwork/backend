@@ -36,11 +36,9 @@ const schema = new Schema<IAssignatura>({
   LlistaEstudiants: { type: Array, required: true }
 });
 
-
-
 // Add timestamp plugin for createdAt and updatedAt in miliseconds from epoch
 schema.plugin(TimeStampPlugin);
-schema.index({ "nomComplet" : 1, "grauID" : 1 }, { "unique":true });
+schema.index({ nomComplet: 1, grauID: 1 }, { unique: true });
 
 const Assignatura: IAssignaturaModel = model<IAssignatura, IAssignaturaModel>('Assignatura', schema);
 

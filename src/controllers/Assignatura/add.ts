@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { RequestHandler } from 'express';
 import Joi from '@hapi/joi';
 import requestMiddleware from '../../middleware/request-middleware';
@@ -16,7 +17,9 @@ export const addAssignaturaSchema = Joi.object().keys({
 });
 
 const add: RequestHandler = async (req, res) => {
-  const { nomComplet, nomSigles, quadrimestre, credits, tipus, mailProfessor, grauID, xatAssignaturaID, LlistaEstudiants } = req.body;
+  const {
+    nomComplet, nomSigles, quadrimestre, credits, tipus, mailProfessor, grauID, xatAssignaturaID, LlistaEstudiants 
+  } = req.body;
   const assignatura = new Assignatura({
     nomComplet, nomSigles, quadrimestre, credits, tipus, mailProfessor, grauID, xatAssignaturaID, LlistaEstudiants
   });
