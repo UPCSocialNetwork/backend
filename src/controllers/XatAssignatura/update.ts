@@ -8,8 +8,7 @@ Joi.objectId = require('joi-objectid')(Joi);
 
 export const updateXatAssignaturaSchema = Joi.object().keys({
   guiaDocent: Joi.string().required(),
-  grupAssignatura: Joi.string().required(),
-  mailProfessor: Joi.string().required(),
+  mailProfessor: Joi.array().required(),
   delegatID: Joi.string().required(),
   titol: Joi.string().required(),
   descripcio: Joi.string().required(),
@@ -20,13 +19,12 @@ export const updateXatAssignaturaSchema = Joi.object().keys({
 const update: RequestHandler = async (req, res) => {
   const { id } = req.params;
   const {
-    guiaDocent, grupAssignatura, mailProfessor, delegatID, titol, descripcio, imatge, ultimMissatge
+    guiaDocent, mailProfessor, delegatID, titol, descripcio, imatge, ultimMissatge
   } = req.body;
   let xatAssignatura: IXatAssignatura = null;
   try {
     xatAssignatura = await XatAssignatura.findById({ _id: id });
     xatAssignatura.guiaDocent = guiaDocent;
-    xatAssignatura.grupAssignatura = grupAssignatura;
     xatAssignatura.mailProfessor = mailProfessor;
     xatAssignatura.delegatID = delegatID;
     xatAssignatura.titol = titol;

@@ -9,12 +9,8 @@ export interface IXatAssignatura extends IXatGrupal {
     assignaturaID: string;
     /** Informacio guia docent assignatura */
     guiaDocent: string;
-    /** Grup de l'Assignatura */
-    grupAssignatura: string;
-    /** Nom del professor de l'Assignatura */
-    nomProfessor: string;
     /** Mail del professor de l'Assignatura */
-    mailProfessor: string;
+    mailProfessor: Array<string>;
     /** FK de Estudiant */
     delegatID: string;
   }
@@ -24,8 +20,7 @@ export interface IXatAssignatura extends IXatGrupal {
 const schema = new Schema<IXatAssignatura>({
   assignaturaID: { type: String, required: true },
   guiaDocent: { type: String, required: true },
-  grupAssignatura: { type: String, required: true },
-  mailProfessor: { type: String, required: true },
+  mailProfessor: { type: Array, required: true },
   delegatID: { type: String, required: true }
 });
 
