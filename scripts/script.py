@@ -23,7 +23,7 @@ for row in cur.fetchall():
     objects_list.append(c)
 
 centre = json.dumps(objects_list)
-f = open("centreData.json","w+")
+f = open("./scripts/centreData.json","w+")
 f.write(centre)
 
 # Petició:
@@ -38,7 +38,7 @@ for row in cur.fetchall():
     objects_list.append(g)
 
 grau = json.dumps(objects_list)
-f = open("grauData.json","w+")
+f = open("./scripts/grauData.json","w+")
 f.write(grau)
 
 
@@ -61,7 +61,7 @@ for row in cur.fetchall():
         objects_list.append(a)
 
 assig = json.dumps(objects_list)
-f = open("assigData.json","w+")
+f = open("./scripts/assigData.json","w+")
 f.write(assig)
 
 db.close()
@@ -73,8 +73,8 @@ except:
     print("Could not connect to MongoDB")
 db = conn.OnCampus
 centreCol = db.centreuniversitaris
-centreCol.insert_many(json.load(open('centreData.json')))
+centreCol.insert_many(json.load(open('./scripts/centreData.json')))
 grauCol = db.graus
-grauCol.insert_many(json.load(open('grauData.json')))
+grauCol.insert_many(json.load(open('./scripts/grauData.json')))
 assigCol = db.assignaturas
-assigCol.insert_many(json.load(open('assigData.json')))
+assigCol.insert_many(json.load(open('./scripts/assigData.json')))
