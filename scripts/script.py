@@ -51,21 +51,32 @@ for row in cur.fetchall():
     a=collections.OrderedDict()
     b=collections.OrderedDict()
     if (len(row[1]) != 6):
-        a["nomComplet"]=b["assignaturaID"]=row[0]
+        a["nomComplet"]=row[0]
+        b["assignaturaID"]=row[0]
+        b["guiaDocent"]="-"
         a["nomSigles"]=row[1].split('-')[0]
         a["quadrimestre"]=row[2]
         a["credits"]=row[3]
         a["tipus"]=row[4]
-        a["mailProfessor"]=b["mailProfessor"]=row[5].split("; ")
+        a["mailProfessor"]=row[5].split("; ")
+        b["mailProfessor"]=row[5].split("; ")
         a["grauID"]=row[6]
         a["xatAssignaturaID"]=""
         a["LlistaEstudiants"]=[]
-        b[""]
+        b["delegatID"]="-"
+        b["titol"]="Xat de " + row[0]
+        b["descripcio"]="Aquest xat és el xat oficial de l'assignatura de " + row[0] + "."
+        b["imatge"]="-"
+        b["ultimMissatge"]="-"
         objects_list_assig.append(a)
+        objects_list_xatAssig.append(b)
 
 assig = json.dumps(objects_list_assig)
+xatAssig = json.dumps(objects_list_xatAssig)
 f = open("./scripts/assigData.json","w+")
 f.write(assig)
+x = open("./scripts/xatAssigData.json","w+")
+x.write(xatAssig)
 
 # Petició Xats Assignatura
 
@@ -83,3 +94,5 @@ grauCol = db.graus
 grauCol.insert_many(json.load(open('./scripts/grauData.json')))
 assigCol = db.assignaturas
 assigCol.insert_many(json.load(open('./scripts/assigData.json')))
+xatAssigCol = db.xatassignaturas
+xatAssigCol.insert_many(json.load(open('./scripts/xatAssigData.json')))

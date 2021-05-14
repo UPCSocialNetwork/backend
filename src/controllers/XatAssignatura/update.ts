@@ -7,7 +7,7 @@ const Joi = require('@hapi/joi');
 Joi.objectId = require('joi-objectid')(Joi);
 
 export const updateXatAssignaturaSchema = Joi.object().keys({
-  guiaDocent: Joi.string().required(),
+  guiaDocent: Joi.string(),
   mailProfessor: Joi.array().required(),
   delegatID: Joi.string().required(),
   titol: Joi.string().required(),

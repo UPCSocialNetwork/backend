@@ -6,7 +6,7 @@ import XatAssignatura from '../../models/XatAssignatura';
 
 export const addXatAssignaturaSchema = Joi.object().keys({
   assignaturaID: Joi.string().required(),
-  guiaDocent: Joi.string().required(),
+  guiaDocent: Joi.string(),
   mailProfessor: Joi.array().required(),
   delegatID: Joi.string().required(),
   titol: Joi.string().required(),

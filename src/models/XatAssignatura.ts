@@ -19,7 +19,7 @@ export interface IXatAssignatura extends IXatGrupal {
 
 const schema = new Schema<IXatAssignatura>({
   assignaturaID: { type: String, required: true },
-  guiaDocent: { type: String, required: true },
+  guiaDocent: { type: String },
   mailProfessor: { type: Array, required: true },
   delegatID: { type: String, required: true }
 });

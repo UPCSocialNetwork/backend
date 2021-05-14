@@ -13,6 +13,7 @@ import * as CursadaController from './controllers/Cursada';
 import * as ParticipantController from './controllers/Participant';
 import * as MissatgeController from './controllers/Missatge';
 import * as EnquestaController from './controllers/Enquesta';
+import * as XatAssignatura from './controllers/XatAssignatura';
 
 const swaggerUiOptions = {
   customCss: '.swagger-ui .topbar { display: none }'
@@ -89,6 +90,13 @@ router.get('/XatGrupal', XatGrupal.getAll);
 router.get('/XatGrupal/:id', XatGrupal.getOne);
 router.put('/XatGrupal/:id', XatGrupal.update);
 router.delete('/XatGrupal/:id', XatGrupal.deleteXatGrupal);
+
+// XatAssignatura rutes
+router.post('/XatAssignatura', XatAssignatura.add);
+router.get('/XatAssignatura', XatAssignatura.getAll);
+router.get('/XatAssignatura/:id', XatAssignatura.getOne);
+router.put('/XatAssignatura/:id', XatAssignatura.update);
+router.delete('/XatAssignatura/:id', XatAssignatura.deleteXatAssignatura);
 
 // XatMentor rutes
 router.post('/XatMentor', XatMentor.add);
