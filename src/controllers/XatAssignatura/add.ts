@@ -8,7 +8,6 @@ export const addXatAssignaturaSchema = Joi.object().keys({
   assignaturaID: Joi.string().required(),
   guiaDocent: Joi.string().required(),
   grupAssignatura: Joi.string().required(),
-  nomProfessor: Joi.string().required(),
   mailProfessor: Joi.string().required(),
   delegatID: Joi.string().required(),
   titol: Joi.string().required(),
@@ -19,10 +18,10 @@ export const addXatAssignaturaSchema = Joi.object().keys({
 
 const add: RequestHandler = async (req, res) => {
   const {
-    assignaturaID, guiaDocent, grupAssignatura, nomProfessor, mailProfesor, delegatID, titol, descripcio, imatge, ultimMissatge
+    assignaturaID, guiaDocent, grupAssignatura, mailProfesor, delegatID, titol, descripcio, imatge, ultimMissatge
   } = req.body;
   const xatAssignatura = new XatAssignatura({
-    assignaturaID, guiaDocent, grupAssignatura, nomProfessor, mailProfesor, delegatID, titol, descripcio, imatge, ultimMissatge
+    assignaturaID, guiaDocent, grupAssignatura, mailProfesor, delegatID, titol, descripcio, imatge, ultimMissatge
   });
   try {
     await xatAssignatura.save();

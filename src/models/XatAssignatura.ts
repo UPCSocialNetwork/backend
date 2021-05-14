@@ -25,7 +25,6 @@ const schema = new Schema<IXatAssignatura>({
   assignaturaID: { type: String, required: true },
   guiaDocent: { type: String, required: true },
   grupAssignatura: { type: String, required: true },
-  nomProfessor: { type: String, required: true },
   mailProfessor: { type: String, required: true },
   delegatID: { type: String, required: true }
 });
