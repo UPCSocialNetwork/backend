@@ -5,9 +5,12 @@ import express, { Request, Response, NextFunction } from "express";
 import ApplicationError from "./errors/application-error";
 import routes from "./routes";
 import logger from "./logger";
+const cors = require("cors");
 
 const app = express();
 
+app.use(cors());
+/*
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -16,7 +19,7 @@ app.use(function (req, res, next) {
   );
   next();
 });
-
+*/
 function logResponseTime(req: Request, res: Response, next: NextFunction) {
   const startHrTime = process.hrtime();
 
