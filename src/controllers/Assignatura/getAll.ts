@@ -8,7 +8,7 @@ const all: RequestHandler = async (req, res) => {
     assignatura = await Assignatura.find();
   } catch (e) {
     return res.send({ message: e });
-  };
+  }
   return res.send({ assignatura });
 };
 
