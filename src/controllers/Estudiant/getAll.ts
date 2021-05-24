@@ -1,6 +1,6 @@
-import { RequestHandler } from "express";
-import requestMiddleware from "../../middleware/request-middleware";
-import Estudiant from "../../models/Estudiant";
+import { RequestHandler } from 'express';
+import requestMiddleware from '../../middleware/request-middleware';
+import Estudiant from '../../models/Estudiant';
 
 const all: RequestHandler = async (req, res) => {
   let estudiant = null;

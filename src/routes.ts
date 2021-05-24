@@ -71,11 +71,11 @@ router.put('/assignatura/update', AssignaturaController.update);
 router.delete('/assignatura/delete', AssignaturaController.deleteAssignatura);
 
 // Estudiant rutes
-router.post('/estudiant/add', EstudiantController.add);
-router.get('/estudiant/getAll', EstudiantController.getAll);
-router.get('/estudiant/getOne', EstudiantController.getOne);
-router.put('/estudiant/update', EstudiantController.update);
-router.delete('/estudiant/delete', EstudiantController.deleteEstudiant);
+router.post('/estudiant', EstudiantController.add);
+router.get('/estudiant', EstudiantController.getAll);
+router.get('/estudiant/:id', EstudiantController.getOne);
+router.put('/estudiant/:id', EstudiantController.update);
+router.delete('/estudiant/:id', EstudiantController.deleteEstudiant);
 
 // Xat rutes
 router.post('/Xat', XatGrupal.add);
