@@ -1,8 +1,13 @@
+/* eslint-disable prefer-template */
+/* eslint-disable no-plusplus */
+/* eslint-disable no-await-in-loop */
+/* eslint-disable prefer-const */
 import { RequestHandler } from 'express';
 import requestMiddleware from '../../middleware/request-middleware';
 import Estudiant, { IEstudiant } from '../../models/Estudiant';
 import Participant, { IParticipant } from '../../models/Participant';
 import Xat, { IXat } from '../../models/Xat';
+import Missatge, { IMissatge } from '../../models/Missatge';
 
 const getXats: RequestHandler = async (req, res) => {
   const { id } = req.params;
@@ -29,10 +34,10 @@ const getXats: RequestHandler = async (req, res) => {
       const element = nousXats[index][0];
       let count = await Participant.find({ xatID: element._id });
       if (count.length < 3) {
-        if (count[0].estudiantID == id) {
-          privats.push([count[1].estudiantID, element.ultimMissatge]);
+        if (count[0].estudiantID === id) {
+          privats.push([count[1].estudiantID, element.ultimMissatgeID]);
         } else {
-          privats.push([count[0].estudiantID, element.ultimMissatge]);
+          privats.push([count[0].estudiantID, element.ultimMissatgeID]);
         }
       }
     }
@@ -40,7 +45,18 @@ const getXats: RequestHandler = async (req, res) => {
     return res.send({ e });
   }
   if (!privats) return res.send({ message: 'Privats not found' });
-  return res.send({ privats });
+  let xatsFinals = [];
+  try {
+    for (let index = 0; index < privats.length; index++) {
+      const element = privats[index];
+      let missatge = await Missatge.findById({ _id: element[1] });
+      xatsFinals.push([element[0], missatge.text, missatge.updatedAt]);
+    }
+  } catch (e) {
+    return res.send({ e });
+  }
+  if (!xatsFinals) return res.send({ message: 'Xats amb ultim missatge not found' });
+  return res.send({ xatsFinals });
 };
 
 export default requestMiddleware(getXats);

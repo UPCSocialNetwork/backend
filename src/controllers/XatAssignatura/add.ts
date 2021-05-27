@@ -12,15 +12,20 @@ export const addXatAssignaturaSchema = Joi.object().keys({
   titol: Joi.string().required(),
   descripcio: Joi.string().required(),
   imatge: Joi.string().required(),
-  ultimMissatge: Joi.string().required()
+  ultimMissatgeID: Joi.string().required()
 });
 
 const add: RequestHandler = async (req, res) => {
-  const {
-    assignaturaID, guiaDocent, mailProfessor, delegatID, titol, descripcio, imatge, ultimMissatge
-  } = req.body;
+  const { assignaturaID, guiaDocent, mailProfessor, delegatID, titol, descripcio, imatge, ultimMissatgeID } = req.body;
   const xatAssignatura = new XatAssignatura({
-    assignaturaID, guiaDocent, mailProfessor, delegatID, titol, descripcio, imatge, ultimMissatge
+    assignaturaID,
+    guiaDocent,
+    mailProfessor,
+    delegatID,
+    titol,
+    descripcio,
+    imatge,
+    ultimMissatgeID
   });
   try {
     await xatAssignatura.save();
@@ -28,7 +33,7 @@ const add: RequestHandler = async (req, res) => {
     return res.send({
       message: e
     });
-  };
+  }
 
   return res.send({
     message: 'Saved',

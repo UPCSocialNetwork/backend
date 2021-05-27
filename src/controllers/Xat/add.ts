@@ -4,20 +4,20 @@ import requestMiddleware from '../../middleware/request-middleware';
 import Xat from '../../models/Xat';
 
 export const addXatSchema = Joi.object().keys({
-  ultimMissatge: Joi.string().required()
+  ultimMissatgeID: Joi.string()
 });
 
 const add: RequestHandler = async (req, res) => {
-  const { ultimMissatge } = req.body;
+  const { ultimMissatgeID } = req.body;
 
-  const xat = new Xat({ ultimMissatge });
+  const xat = new Xat({ ultimMissatgeID });
   try {
     await xat.save();
   } catch (e) {
     return res.send({
       message: e
     });
-  };
+  }
 
   return res.send({
     message: 'Saved',

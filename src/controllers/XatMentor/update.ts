@@ -10,14 +10,12 @@ export const updateXatMentorSchema = Joi.object().keys({
   titol: Joi.string().required(),
   descripcio: Joi.string().required(),
   imatge: Joi.string().required(),
-  ultimMissatge: Joi.string().required()
+  ultimMissatgeID: Joi.string().required()
 });
 
 const update: RequestHandler = async (req, res) => {
   const { id } = req.params;
-  const {
-    mentorID, titol, descripcio, imatge, ultimMissatge
-  } = req.body;
+  const { mentorID, titol, descripcio, imatge, ultimMissatgeID } = req.body;
   let xatMentor: IXatMentor = null;
   try {
     xatMentor = await XatMentor.findById({ _id: id });
@@ -25,9 +23,11 @@ const update: RequestHandler = async (req, res) => {
     xatMentor.titol = titol;
     xatMentor.descripcio = descripcio;
     xatMentor.imatge = imatge;
-    xatMentor.ultimMissatge = ultimMissatge;
+    xatMentor.ultimMissatgeID = ultimMissatgeID;
     await xatMentor.save();
-  } catch (e) { return res.send({ message: e }); };
+  } catch (e) {
+    return res.send({ message: e });
+  }
   if (!xatMentor) return res.send({ message: 'XatMentor not found' });
   return res.send({
     message: 'Updated XatMentor',

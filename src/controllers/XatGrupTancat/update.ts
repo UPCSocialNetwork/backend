@@ -10,23 +10,23 @@ export const updateXatGrupTancatSchema = Joi.object().keys({
   titol: Joi.string().required(),
   descripcio: Joi.string().required(),
   imatge: Joi.string().required(),
-  ultimMissatge: Joi.string().required()
+  ultimMissatgeID: Joi.string().required()
 });
 
 const update: RequestHandler = async (req, res) => {
   const { id } = req.params;
-  const {
-    titol, descripcio, imatge, ultimMissatge
-  } = req.body;
+  const { titol, descripcio, imatge, ultimMissatgeID } = req.body;
   let xatGrupTancat: IXatGrupTancat = null;
   try {
     xatGrupTancat = await XatGrupTancat.findById({ _id: id });
     xatGrupTancat.titol = titol;
     xatGrupTancat.descripcio = descripcio;
     xatGrupTancat.imatge = imatge;
-    xatGrupTancat.ultimMissatge = ultimMissatge;
+    xatGrupTancat.ultimMissatgeID = ultimMissatgeID;
     await xatGrupTancat.save();
-  } catch (e) { return res.send({ message: e }); };
+  } catch (e) {
+    return res.send({ message: e });
+  }
   if (!xatGrupTancat) return res.send({ message: 'XatGrupTancat not found' });
   return res.send({
     message: 'Updated XatGrupTancat',
