@@ -6,6 +6,7 @@ import * as CentreUniversitariController from './controllers/CentreUniversitari'
 import * as AssignaturaController from './controllers/Assignatura';
 import * as EstudiantController from './controllers/Estudiant';
 import * as GrauController from './controllers/Grau';
+import * as Xat from './controllers/Xat';
 import * as XatGrupal from './controllers/XatGrupal';
 import * as XatMentor from './controllers/XatMentor';
 import * as XatGrupTancat from './controllers/XatGrupTancat';
@@ -74,15 +75,16 @@ router.delete('/assignatura/delete', AssignaturaController.deleteAssignatura);
 router.post('/estudiant', EstudiantController.add);
 router.get('/estudiant', EstudiantController.getAll);
 router.get('/estudiant/:id', EstudiantController.getOne);
+router.get('/estudiant/xats/:id', EstudiantController.getXats);
 router.put('/estudiant/:id', EstudiantController.update);
 router.delete('/estudiant/:id', EstudiantController.deleteEstudiant);
 
 // Xat rutes
-router.post('/Xat', XatGrupal.add);
-router.get('/Xat', XatGrupal.getAll);
-router.get('/Xat/:id', XatGrupal.getOne);
-router.put('/Xat/:id', XatGrupal.update);
-router.delete('/Xat/:id', XatGrupal.deleteXatGrupal);
+router.post('/Xat', Xat.add);
+router.get('/Xat', Xat.getAll);
+router.get('/Xat/:id', Xat.getOne);
+router.put('/Xat/:id', Xat.update);
+router.delete('/Xat/:id', Xat.deleteXat);
 
 // XatGrupal rutes
 router.post('/XatGrupal', XatGrupal.add);
