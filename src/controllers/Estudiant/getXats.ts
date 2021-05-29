@@ -1,3 +1,4 @@
+/* eslint-disable no-lonely-if */
 /* eslint-disable prefer-template */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-await-in-loop */
@@ -35,9 +36,13 @@ const getXats: RequestHandler = async (req, res) => {
       let count = await Participant.find({ xatID: element._id });
       if (count.length < 3) {
         if (count[0].estudiantID === id) {
-          privats.push([count[1].estudiantID, element.ultimMissatgeID]);
+          if (element.ultimMissatgeID) {
+            privats.push([count[1].estudiantID, element.ultimMissatgeID]);
+          }
         } else {
-          privats.push([count[0].estudiantID, element.ultimMissatgeID]);
+          if (element.ultimMissatgeID) {
+            privats.push([count[0].estudiantID, element.ultimMissatgeID]);
+          }
         }
       }
     }
