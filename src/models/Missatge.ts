@@ -1,18 +1,15 @@
-import {
-  Model, Schema, model
-} from 'mongoose';
-import TimeStampPlugin, {
-  ITimeStampedDocument
-} from './plugins/timestamp-plugin';
+import { Model, Schema, model } from 'mongoose';
+import TimeStampPlugin, { ITimeStampedDocument } from './plugins/timestamp-plugin';
 
 export interface IMissatge extends ITimeStampedDocument {
+  length: number;
   /** Text del missatge */
   text: string;
   /** FK ID del participant */
   participantID: string;
-  }
+}
 
-  interface IMissatgeModel extends Model<IMissatge> { }
+interface IMissatgeModel extends Model<IMissatge> {}
 
 const schema = new Schema<IMissatge>({
   text: { type: String, required: true },

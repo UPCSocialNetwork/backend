@@ -5,17 +5,18 @@ import XatGrupal from '../../models/XatGrupal';
 
 export const addXatGrupalSchema = Joi.object().keys({
   titol: Joi.string().required(),
-  descripcio: Joi.string().required(),
-  imatge: Joi.string().required(),
-  ultimMissatge: Joi.string().required()
+  descripcio: Joi.string(),
+  imatge: Joi.string(),
+  ultimMissatgeID: Joi.string()
 });
 
 const add: RequestHandler = async (req, res) => {
-  const {
-    titol, descripcio, imatge, ultimMissatge
-  } = req.body;
+  const { titol, descripcio, imatge, ultimMissatgeID } = req.body;
   const xatGrupal = new XatGrupal({
-    titol, descripcio, imatge, ultimMissatge
+    titol,
+    descripcio,
+    imatge,
+    ultimMissatgeID
   });
   try {
     await xatGrupal.save();
@@ -23,7 +24,7 @@ const add: RequestHandler = async (req, res) => {
     return res.send({
       message: e
     });
-  };
+  }
 
   return res.send({
     message: 'Saved',

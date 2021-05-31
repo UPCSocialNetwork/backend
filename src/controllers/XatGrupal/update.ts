@@ -7,26 +7,26 @@ const Joi = require('@hapi/joi');
 Joi.objectId = require('joi-objectid')(Joi);
 
 export const updateXatGrupalSchema = Joi.object().keys({
-  titol: Joi.string().required(),
-  descripcio: Joi.string().required(),
-  imatge: Joi.string().required(),
-  ultimMissatge: Joi.string().required()
+  titol: Joi.string(),
+  descripcio: Joi.string(),
+  imatge: Joi.string(),
+  ultimMissatgeID: Joi.string()
 });
 
 const update: RequestHandler = async (req, res) => {
   const { id } = req.params;
-  const {
-    titol, descripcio, imatge, ultimMissatge
-  } = req.body;
+  const { titol, descripcio, imatge, ultimMissatgeID } = req.body;
   let xatGrupal: IXatGrupal = null;
   try {
     xatGrupal = await XatGrupal.findById({ _id: id });
     xatGrupal.titol = titol;
     xatGrupal.descripcio = descripcio;
     xatGrupal.imatge = imatge;
-    xatGrupal.ultimMissatge = ultimMissatge;
+    xatGrupal.ultimMissatgeID = ultimMissatgeID;
     await xatGrupal.save();
-  } catch (e) { return res.send({ message: e }); };
+  } catch (e) {
+    return res.send({ message: e });
+  }
   if (!xatGrupal) return res.send({ message: 'XatGrupal not found' });
   return res.send({
     message: 'Updated XatGrupal',

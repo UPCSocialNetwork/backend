@@ -8,19 +8,17 @@ Joi.objectId = require('joi-objectid')(Joi);
 
 export const updateXatAssignaturaSchema = Joi.object().keys({
   guiaDocent: Joi.string(),
-  mailProfessor: Joi.array().required(),
-  delegatID: Joi.string().required(),
-  titol: Joi.string().required(),
-  descripcio: Joi.string().required(),
-  imatge: Joi.string().required(),
-  ultimMissatge: Joi.string().required()
+  mailProfessor: Joi.array(),
+  delegatID: Joi.string(),
+  titol: Joi.string(),
+  descripcio: Joi.string(),
+  imatge: Joi.string(),
+  ultimMissatgeID: Joi.string()
 });
 
 const update: RequestHandler = async (req, res) => {
   const { id } = req.params;
-  const {
-    guiaDocent, mailProfessor, delegatID, titol, descripcio, imatge, ultimMissatge
-  } = req.body;
+  const { guiaDocent, mailProfessor, delegatID, titol, descripcio, imatge, ultimMissatgeID } = req.body;
   let xatAssignatura: IXatAssignatura = null;
   try {
     xatAssignatura = await XatAssignatura.findById({ _id: id });
@@ -30,9 +28,11 @@ const update: RequestHandler = async (req, res) => {
     xatAssignatura.titol = titol;
     xatAssignatura.descripcio = descripcio;
     xatAssignatura.imatge = imatge;
-    xatAssignatura.ultimMissatge = ultimMissatge;
+    xatAssignatura.ultimMissatgeID = ultimMissatgeID;
     await xatAssignatura.save();
-  } catch (e) { return res.send({ message: e }); };
+  } catch (e) {
+    return res.send({ message: e });
+  }
   if (!xatAssignatura) return res.send({ message: 'XatAssignatura not found' });
   return res.send({
     message: 'Updated XatAssignatura',

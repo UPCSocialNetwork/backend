@@ -4,18 +4,19 @@ import requestMiddleware from '../../middleware/request-middleware';
 import XatGrupTancat from '../../models/XatGrupTancat';
 
 export const addXatGrupTancatSchema = Joi.object().keys({
-  titol: Joi.string().required(),
-  descripcio: Joi.string().required(),
-  imatge: Joi.string().required(),
-  ultimMissatge: Joi.string().required()
+  titol: Joi.string(),
+  descripcio: Joi.string(),
+  imatge: Joi.string(),
+  ultimMissatgeID: Joi.string()
 });
 
 const add: RequestHandler = async (req, res) => {
-  const {
-    titol, descripcio, imatge, ultimMissatge
-  } = req.body;
+  const { titol, descripcio, imatge, ultimMissatgeID } = req.body;
   const xatGrupTancat = new XatGrupTancat({
-    titol, descripcio, imatge, ultimMissatge
+    titol,
+    descripcio,
+    imatge,
+    ultimMissatgeID
   });
   try {
     await xatGrupTancat.save();
@@ -23,7 +24,7 @@ const add: RequestHandler = async (req, res) => {
     return res.send({
       message: e
     });
-  };
+  }
 
   return res.send({
     message: 'Saved',
