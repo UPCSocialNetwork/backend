@@ -46,17 +46,20 @@ const getGrups: RequestHandler = async (req, res) => {
     grups.push([element.titol, element.ultimMissatgeID]);
   }
   if (!grups) return res.send({ message: 'Grups not found' });
-  //console.log('Grups: ' + grups);
   let xatsFinals: (string | number)[][] = [];
   try {
     for (let index = 0; index < grups.length; index++) {
       const element = grups[index];
       await Missatge.findById({ _id: element[1] })
-        .then((response) => {
-          xatsFinals.push([element[0], response.text, response.updatedAt]);
+        .then(async (response) => {
+          await Participant.findById({ _id: response.participantID })
+            .then((resp) => {
+              xatsFinals.push([element[0], response.text, response.updatedAt, resp.estudiantID]);
+            })
+            .catch((e) => {});
         })
         .catch(() => {
-          xatsFinals.push([element[0], 'Cap missatge', 404]);
+          xatsFinals.push([element[0], 'Cap missatge', 404, '']);
         });
     }
   } catch (e) {
