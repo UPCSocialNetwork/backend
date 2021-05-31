@@ -7,10 +7,10 @@ const Joi = require('@hapi/joi');
 Joi.objectId = require('joi-objectid')(Joi);
 
 export const updateXatGrupalSchema = Joi.object().keys({
-  titol: Joi.string().required(),
-  descripcio: Joi.string().required(),
-  imatge: Joi.string().required(),
-  ultimMissatgeID: Joi.string().required()
+  titol: Joi.string(),
+  descripcio: Joi.string(),
+  imatge: Joi.string(),
+  ultimMissatgeID: Joi.string()
 });
 
 const update: RequestHandler = async (req, res) => {

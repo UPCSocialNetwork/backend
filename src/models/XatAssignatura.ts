@@ -1,21 +1,20 @@
-import {
-  Model, Schema, model
-} from 'mongoose';
+import { Model, Schema, model } from 'mongoose';
 import TimeStampPlugin from './plugins/timestamp-plugin';
 import { IXatGrupal, xatGrup } from './XatGrupal';
+import { xatGlobal } from './Xat';
 
 export interface IXatAssignatura extends IXatGrupal {
-    /** FK d'Assignatura */
-    assignaturaID: string;
-    /** Informacio guia docent assignatura */
-    guiaDocent: string;
-    /** Mail del professor de l'Assignatura */
-    mailProfessor: Array<string>;
-    /** FK de Estudiant */
-    delegatID: string;
-  }
+  /** FK d'Assignatura */
+  assignaturaID: string;
+  /** Informacio guia docent assignatura */
+  guiaDocent: string;
+  /** Mail del professor de l'Assignatura */
+  mailProfessor: Array<string>;
+  /** FK de Estudiant */
+  delegatID: string;
+}
 
-  interface IXatAssignaturaModel extends Model<IXatAssignatura> { }
+interface IXatAssignaturaModel extends Model<IXatAssignatura> {}
 
 const schema = new Schema<IXatAssignatura>({
   assignaturaID: { type: String, required: true },
@@ -24,6 +23,7 @@ const schema = new Schema<IXatAssignatura>({
   delegatID: { type: String, required: true }
 });
 
+schema.plugin(xatGlobal);
 schema.plugin(xatGrup);
 schema.plugin(TimeStampPlugin);
 const XatAssignatura: IXatAssignaturaModel = model<IXatAssignatura, IXatAssignaturaModel>('XatAssignatura', schema);

@@ -5,10 +5,9 @@
 /* eslint-disable prefer-const */
 import { RequestHandler } from 'express';
 import requestMiddleware from '../../middleware/request-middleware';
-import Estudiant, { IEstudiant } from '../../models/Estudiant';
-import Participant, { IParticipant } from '../../models/Participant';
-import Xat, { IXat } from '../../models/Xat';
-import Missatge, { IMissatge } from '../../models/Missatge';
+import Participant from '../../models/Participant';
+import Xat from '../../models/Xat';
+import Missatge from '../../models/Missatge';
 
 const getXats: RequestHandler = async (req, res) => {
   const { id } = req.params;

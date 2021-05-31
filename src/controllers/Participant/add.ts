@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { RequestHandler } from 'express';
 import Joi from '@hapi/joi';
 import requestMiddleware from '../../middleware/request-middleware';
@@ -21,11 +22,11 @@ const add: RequestHandler = async (req, res) => {
     return res.send({
       message: e
     });
-  };
+  }
 
   return res.send({
     message: 'Saved',
-    Grau: participant.toJSON()
+    Participant: participant.toJSON()
   });
 };
 

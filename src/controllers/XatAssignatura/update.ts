@@ -8,12 +8,12 @@ Joi.objectId = require('joi-objectid')(Joi);
 
 export const updateXatAssignaturaSchema = Joi.object().keys({
   guiaDocent: Joi.string(),
-  mailProfessor: Joi.array().required(),
-  delegatID: Joi.string().required(),
-  titol: Joi.string().required(),
-  descripcio: Joi.string().required(),
-  imatge: Joi.string().required(),
-  ultimMissatgeID: Joi.string().required()
+  mailProfessor: Joi.array(),
+  delegatID: Joi.string(),
+  titol: Joi.string(),
+  descripcio: Joi.string(),
+  imatge: Joi.string(),
+  ultimMissatgeID: Joi.string()
 });
 
 const update: RequestHandler = async (req, res) => {

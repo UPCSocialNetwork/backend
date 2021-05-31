@@ -67,7 +67,7 @@ for row in cur.fetchall():
         b["titol"]="Xat de " + row[0]
         b["descripcio"]="Aquest xat és el xat oficial de l'assignatura de " + row[0] + "."
         b["imatge"]="-"
-        b["ultimMissatge"]="-"
+        b["ultimMissatgeID"]="-"
         objects_list_assig.append(a)
         objects_list_xatAssig.append(b)
 

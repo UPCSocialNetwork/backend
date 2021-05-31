@@ -5,9 +5,9 @@ import XatGrupal from '../../models/XatGrupal';
 
 export const addXatGrupalSchema = Joi.object().keys({
   titol: Joi.string().required(),
-  descripcio: Joi.string().required(),
-  imatge: Joi.string().required(),
-  ultimMissatgeID: Joi.string().required()
+  descripcio: Joi.string(),
+  imatge: Joi.string(),
+  ultimMissatgeID: Joi.string()
 });
 
 const add: RequestHandler = async (req, res) => {
