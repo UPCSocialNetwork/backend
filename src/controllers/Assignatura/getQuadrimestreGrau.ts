@@ -2,11 +2,11 @@ import { RequestHandler } from 'express';
 import requestMiddleware from '../../middleware/request-middleware';
 import Assignatura, { IAssignatura } from '../../models/Assignatura';
 
-const getGrau: RequestHandler = async (req, res) => {
-  const { grauID } = req.body;
+const getQuadrimestreGrau: RequestHandler = async (req, res) => {
+  const { grauID, quadrimestre } = req.body;
   let assignatura: IAssignatura[] = null;
   try {
-    assignatura = await Assignatura.find({ grauID });
+    assignatura = await Assignatura.find({ grauID, quadrimestre });
   } catch (e) {
     return res.send({ e });
   }
@@ -14,4 +14,4 @@ const getGrau: RequestHandler = async (req, res) => {
   return res.send({ assignatura });
 };
 
-export default requestMiddleware(getGrau);
+export default requestMiddleware(getQuadrimestreGrau);

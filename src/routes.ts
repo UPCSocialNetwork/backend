@@ -67,7 +67,7 @@ router.delete('/enquesta/delete', EnquestaController.deleteEnquesta);
 router.post('/assignatura/add', AssignaturaController.add);
 router.get('/assignatura/getAll', AssignaturaController.getAll);
 router.get('/assignatura/getOne', AssignaturaController.getOne);
-router.get('/assignatura/getGrau', AssignaturaController.getGrau);
+router.get('/assignatura/getGrau', AssignaturaController.getQuadrimestreGrau);
 router.put('/assignatura/update', AssignaturaController.update);
 router.delete('/assignatura/delete', AssignaturaController.deleteAssignatura);
 

@@ -1,8 +1,8 @@
 import add from './add';
 import getAll from './getAll';
 import getOne from './getOne';
-import getGrau from './getGrau';
+import getQuadrimestreGrau from './getQuadrimestreGrau';
 import update from './update';
 import deleteAssignatura from './delete';
 
-export { add, getAll, getOne, getGrau, update, deleteAssignatura };
+export { add, getAll, getOne, getQuadrimestreGrau, update, deleteAssignatura };
