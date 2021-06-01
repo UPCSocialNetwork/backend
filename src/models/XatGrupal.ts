@@ -23,7 +23,7 @@ schema.plugin(xatGlobal);
 schema.plugin(TimeStampPlugin);
 
 export const xatGrup = function (schem: Schema) {
-  schem.add({ titol: { type: String } });
+  schem.add({ titol: { type: String, require: true } });
   schem.add({ descripcio: { type: String } });
   schem.add({ imatge: { type: String } });
 };
