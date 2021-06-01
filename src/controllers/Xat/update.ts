@@ -7,18 +7,20 @@ const Joi = require('@hapi/joi');
 Joi.objectId = require('joi-objectid')(Joi);
 
 export const updateXatSchema = Joi.object().keys({
-  ultimMissatge: Joi.string().required()
+  ultimMissatgeID: Joi.string().required()
 });
 
 const update: RequestHandler = async (req, res) => {
   const { id } = req.params;
-  const { ultimMissatge } = req.body;
+  const { ultimMissatgeID } = req.body;
   let xat: IXat = null;
   try {
     xat = await Xat.findById({ _id: id });
-    xat.ultimMissatge = ultimMissatge;
+    xat.ultimMissatgeID = ultimMissatgeID;
     await xat.save();
-  } catch (e) { return res.send({ message: e }); };
+  } catch (e) {
+    return res.send({ message: e });
+  }
   if (!xat) return res.send({ message: 'Xat not found' });
   return res.send({
     message: 'Updated Xat',

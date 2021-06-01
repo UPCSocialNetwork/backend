@@ -14,19 +14,18 @@ export interface IXatGrupal extends IXat {
 interface IXatGrupalModel extends Model<IXatGrupal> {}
 
 const schema = new Schema<IXatGrupal>({
-  titol: { type: String, required: true },
-  descripcio: { type: String, required: true },
-  imatge: { type: String, required: true }
+  titol: { type: String },
+  descripcio: { type: String },
+  imatge: { type: String }
 });
 
 schema.plugin(xatGlobal);
 schema.plugin(TimeStampPlugin);
 
 export const xatGrup = function (schem: Schema) {
-  schem.add({ titol: { type: String, required: true } });
-  schem.add({ descripcio: { type: String, required: true } });
-  schem.add({ imatge: { type: String, required: true } });
-  schem.add({ ultimMissatge: { type: String, required: true } });
+  schem.add({ titol: { type: String } });
+  schem.add({ descripcio: { type: String } });
+  schem.add({ imatge: { type: String } });
 };
 
 const xatGrupal: IXatGrupalModel = model<IXatGrupal, IXatGrupalModel>('XatGrupal', schema);

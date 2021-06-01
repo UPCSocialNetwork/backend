@@ -5,18 +5,20 @@ import XatMentor from '../../models/XatMentor';
 
 export const addXatMentorSchema = Joi.object().keys({
   mentorID: Joi.string().required(),
-  titol: Joi.string().required(),
-  descripcio: Joi.string().required(),
-  imatge: Joi.string().required(),
-  ultimMissatge: Joi.string().required()
+  titol: Joi.string(),
+  descripcio: Joi.string(),
+  imatge: Joi.string(),
+  ultimMissatgeID: Joi.string()
 });
 
 const add: RequestHandler = async (req, res) => {
-  const {
-    mentorID, titol, descripcio, imatge, ultimMissatge
-  } = req.body;
+  const { mentorID, titol, descripcio, imatge, ultimMissatgeID } = req.body;
   const xatMentor = new XatMentor({
-    mentorID, titol, descripcio, imatge, ultimMissatge
+    mentorID,
+    titol,
+    descripcio,
+    imatge,
+    ultimMissatgeID
   });
   try {
     await xatMentor.save();
@@ -24,7 +26,7 @@ const add: RequestHandler = async (req, res) => {
     return res.send({
       message: e
     });
-  };
+  }
 
   return res.send({
     message: 'Saved',
