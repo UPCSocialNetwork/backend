@@ -1,19 +1,17 @@
-import {
-  Model, Schema, model
-} from 'mongoose';
+import { Model, Schema, model } from 'mongoose';
 import TimeStampPlugin from './plugins/timestamp-plugin';
 import { IXat, xatGlobal } from './Xat';
 
 export interface IXatGrupal extends IXat {
-    /** TItol del XatGrupal */
-    titol: string;
-    /** Descripcio del XatGrupal */
-    descripcio: string;
-    /** Imatge del XatGrupal */
-    imatge: string;
-  }
+  /** TItol del XatGrupal */
+  titol: string;
+  /** Descripcio del XatGrupal */
+  descripcio: string;
+  /** Imatge del XatGrupal */
+  imatge: string;
+}
 
-  interface IXatGrupalModel extends Model<IXatGrupal> { }
+interface IXatGrupalModel extends Model<IXatGrupal> {}
 
 const schema = new Schema<IXatGrupal>({
   titol: { type: String, required: true },
