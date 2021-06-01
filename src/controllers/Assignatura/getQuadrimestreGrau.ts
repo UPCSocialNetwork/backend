@@ -3,7 +3,8 @@ import requestMiddleware from '../../middleware/request-middleware';
 import Assignatura, { IAssignatura } from '../../models/Assignatura';
 
 const getQuadrimestreGrau: RequestHandler = async (req, res) => {
-  const { grauID, quadrimestre } = req.body;
+  const grauID = req.params.grau;
+  const quadrimestre = Number(req.params.quad);
   let assignatura: IAssignatura[] = null;
   try {
     assignatura = await Assignatura.find({ grauID, quadrimestre });
