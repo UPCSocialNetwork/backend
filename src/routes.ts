@@ -75,6 +75,7 @@ router.delete('/assignatura/delete', AssignaturaController.deleteAssignatura);
 // Estudiant rutes
 router.post('/estudiant', EstudiantController.add);
 router.get('/estudiant', EstudiantController.getAll);
+router.get('/mentors', EstudiantController.getMentors);
 router.get('/estudiant/:id', EstudiantController.getOne);
 router.get('/estudiant/xats/:id', EstudiantController.getXats);
 router.get('/estudiant/grups/:id', EstudiantController.getGrups);

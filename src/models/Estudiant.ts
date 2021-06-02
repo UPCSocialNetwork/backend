@@ -14,7 +14,7 @@ export interface IEstudiant extends ITimeStampedDocument {
   centreID: string;
   /** Identificador del grau de l'Estudiant */
   grauID: string;
-  /** Identificador del mentor de l'Estudiant */
+  /** Identificador del xat del que és mentor */
   mentorID: string;
   /** Llistat d'interessos de l'Estudiant */
   interessos: Array<string>;
