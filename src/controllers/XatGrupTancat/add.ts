@@ -4,7 +4,7 @@ import requestMiddleware from '../../middleware/request-middleware';
 import XatGrupTancat from '../../models/XatGrupTancat';
 
 export const addXatGrupTancatSchema = Joi.object().keys({
-  titol: Joi.string(),
+  titol: Joi.string().required(),
   descripcio: Joi.string(),
   imatge: Joi.string(),
   ultimMissatgeID: Joi.string()

@@ -7,7 +7,7 @@ const Joi = require('@hapi/joi');
 Joi.objectId = require('joi-objectid')(Joi);
 
 export const updateXatGrupTancatSchema = Joi.object().keys({
-  titol: Joi.string(),
+  titol: Joi.string().required(),
   descripcio: Joi.string(),
   imatge: Joi.string(),
   ultimMissatgeID: Joi.string()
