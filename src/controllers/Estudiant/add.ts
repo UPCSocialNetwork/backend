@@ -10,8 +10,9 @@ export const addEstudiantSchema = Joi.object().keys({
   descripcio: Joi.string().required(),
   centreID: Joi.string().required(),
   grauID: Joi.string().required(),
-  mentorID: Joi.string().required(),
+  esMentor: Joi.boolean().required(),
   interessos: Joi.array(),
+  xatMentorID: Joi.string().required(),
   LlistaAssignatures: Joi.array().required(),
   LlistaXatGrupTancat: Joi.array().required()
 });
@@ -24,8 +25,9 @@ const add: RequestHandler = async (req, res) => {
     descripcio,
     centreID,
     grauID,
-    mentorID,
+    esMentor,
     interessos,
+    xatMentorID,
     LlistaAssignatures,
     LlistaXatGrupTancat
   } = req.body;
@@ -37,8 +39,9 @@ const add: RequestHandler = async (req, res) => {
     descripcio,
     centreID,
     grauID,
-    mentorID,
+    esMentor,
     interessos,
+    xatMentorID,
     LlistaAssignatures,
     LlistaXatGrupTancat
   });
