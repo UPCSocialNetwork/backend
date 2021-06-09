@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import bodyParser from 'body-parser';
 import compression from 'compression';
 import path from 'path';
@@ -9,18 +10,8 @@ import logger from './logger';
 const cors = require('cors');
 
 const app = express();
-
 app.use(cors());
-/*
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
-*/
+
 function logResponseTime(req: Request, res: Response, next: NextFunction) {
   const startHrTime = process.hrtime();
 
@@ -57,5 +48,25 @@ app.use((err: ApplicationError, req: Request, res: Response, next: NextFunction)
     message: err.message
   });
 });
+
+/*
+const httpServer = require('http').createServer(app);
+
+const io = require('socket.io')(httpServer);
+
+io.on('connection', () => {});
+
+httpServer.listen(3000);
+*/
+
+/*
+io.on('connection', (socket: { on: (arg0: string, arg1: () => void) => void }) => {
+  socket.on('conectado', () => {
+    console.log('Usuario conectado');
+  });
+});
+*/
+
+// server.listen(8080, () => console.log('Servidor inicializado'));
 
 export default app;
