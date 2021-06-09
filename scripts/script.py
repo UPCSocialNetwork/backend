@@ -53,6 +53,7 @@ for row in cur.fetchall():
     if (len(row[1]) != 6):
         a["nomComplet"]=row[0]
         b["assignaturaID"]=row[0]
+        b["grauID"]=row[6]
         b["guiaDocent"]="-"
         a["nomSigles"]=row[1].split('-')[0]
         a["quadrimestre"]=row[2]

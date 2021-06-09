@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 /* eslint-disable max-len */
 import { RequestHandler } from 'express';
 import Joi from '@hapi/joi';
@@ -6,6 +7,7 @@ import XatAssignatura from '../../models/XatAssignatura';
 
 export const addXatAssignaturaSchema = Joi.object().keys({
   assignaturaID: Joi.string().required(),
+  grauID: Joi.string().required(),
   guiaDocent: Joi.string(),
   mailProfessor: Joi.array().required(),
   delegatID: Joi.string().required(),
@@ -16,9 +18,11 @@ export const addXatAssignaturaSchema = Joi.object().keys({
 });
 
 const add: RequestHandler = async (req, res) => {
-  const { assignaturaID, guiaDocent, mailProfessor, delegatID, titol, descripcio, imatge, ultimMissatgeID } = req.body;
+  const { assignaturaID, grauID, guiaDocent, mailProfessor, delegatID, titol, descripcio, imatge, ultimMissatgeID } =
+    req.body;
   const xatAssignatura = new XatAssignatura({
     assignaturaID,
+    grauID,
     guiaDocent,
     mailProfessor,
     delegatID,

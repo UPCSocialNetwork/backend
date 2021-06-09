@@ -10,12 +10,13 @@ export interface IXatMentor extends IXatGrupal {
 interface IXatMentorModel extends Model<IXatMentor> {}
 
 const schema = new Schema<IXatMentor>({
-  mentorID: { type: String }
+  mentorID: { type: String, unique: true, required: true }
 });
 
 schema.plugin(xatGlobal);
 schema.plugin(xatGrup);
 schema.plugin(TimeStampPlugin);
+schema.index({ mentorID: 1 });
 const XatMentor: IXatMentorModel = model<IXatMentor, IXatMentorModel>('XatMentor', schema);
 
 export default XatMentor;

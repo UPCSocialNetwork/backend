@@ -3,13 +3,13 @@ import requestMiddleware from '../../middleware/request-middleware';
 import XatAssignatura, { IXatAssignatura } from '../../models/XatAssignatura';
 
 const getOne: RequestHandler = async (req, res) => {
-  const { id } = req.params;
+  const { assignaturaID, grauID } = req.body;
   let xatAssignatura: IXatAssignatura = null;
   try {
-    xatAssignatura = await XatAssignatura.findById({ _id: id });
+    xatAssignatura = await XatAssignatura.findOne({ assignaturaID, grauID });
   } catch (error) {
     return res.send({ error });
-  };
+  }
   if (!xatAssignatura) return res.send({ message: 'XatAssignatura not found' });
   return res.send({ xatAssignatura });
 };
