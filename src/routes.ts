@@ -44,11 +44,11 @@ router.put('/cursada/update', CursadaController.update);
 router.delete('/cursada/delete', CursadaController.deleteCursada);
 
 // Participant rutes
-router.post('/participant/add', ParticipantController.add);
-router.get('/participant/getAll', ParticipantController.getAll);
+router.post('/participant', ParticipantController.add);
+router.get('/participant', ParticipantController.getAll);
 router.get('/participant/getOne', ParticipantController.getOne);
-router.put('/participant/update', ParticipantController.update);
-router.delete('/participant/delete', ParticipantController.deleteParticipant);
+router.put('/participant', ParticipantController.update);
+router.delete('/participant', ParticipantController.deleteParticipant);
 
 // Missatge rutes
 router.post('/missatge/add', MissatgeController.add);
