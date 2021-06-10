@@ -3,10 +3,10 @@ import requestMiddleware from '../../middleware/request-middleware';
 import XatAssignatura, { IXatAssignatura } from '../../models/XatAssignatura';
 
 const getOne: RequestHandler = async (req, res) => {
-  const { assignaturaID, grauID } = req.body;
+  const { titol, grauID } = req.body;
   let xatAssignatura: IXatAssignatura = null;
   try {
-    xatAssignatura = await XatAssignatura.findOne({ assignaturaID, grauID });
+    xatAssignatura = await XatAssignatura.findOne({ titol, grauID });
   } catch (error) {
     return res.send({ error });
   }

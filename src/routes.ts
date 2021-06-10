@@ -98,8 +98,9 @@ router.delete('/XatGrupal/:id', XatGrupal.deleteXatGrupal);
 
 // XatAssignatura rutes
 router.post('/XatAssignatura', XatAssignatura.add);
+router.post('/XatAssignatura/getXatAssig', XatAssignatura.getXatAssig);
 router.get('/XatAssignatura', XatAssignatura.getAll);
-router.get('/XatAssignatura/:id', XatAssignatura.getOne);
+router.get('/XatAssignatura/getOne', XatAssignatura.getOne);
 router.put('/XatAssignatura/:id', XatAssignatura.update);
 router.delete('/XatAssignatura/:id', XatAssignatura.deleteXatAssignatura);
 
