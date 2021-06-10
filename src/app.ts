@@ -10,6 +10,7 @@ import logger from './logger';
 const cors = require('cors');
 
 const app = express();
+
 app.use(cors());
 
 function logResponseTime(req: Request, res: Response, next: NextFunction) {
@@ -48,25 +49,5 @@ app.use((err: ApplicationError, req: Request, res: Response, next: NextFunction)
     message: err.message
   });
 });
-
-/*
-const httpServer = require('http').createServer(app);
-
-const io = require('socket.io')(httpServer);
-
-io.on('connection', () => {});
-
-httpServer.listen(3000);
-*/
-
-/*
-io.on('connection', (socket: { on: (arg0: string, arg1: () => void) => void }) => {
-  socket.on('conectado', () => {
-    console.log('Usuario conectado');
-  });
-});
-*/
-
-// server.listen(8080, () => console.log('Servidor inicializado'));
 
 export default app;
