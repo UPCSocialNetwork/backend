@@ -2,20 +2,28 @@
 /* eslint-disable prefer-const */
 /* eslint-disable max-len */
 import { RequestHandler } from 'express';
+import { IAssignatura } from '../../models/Assignatura';
 import requestMiddleware from '../../middleware/request-middleware';
 import XatAssignatura, { IXatAssignatura } from '../../models/XatAssignatura';
 
-//const assert = require('assert');
+// const assert = require('assert');
 const allSettled = require('promise.allsettled');
 
-const getXats = async (LlistaAssignatures: Array<string>, grauID: string) => {
+interface Assignatura {
+  grauID: string;
+  nomComplet: string;
+  nomSigles: string;
+  quad: Number;
+}
+
+const getXats = async (LlistaAssignatures: Array<Assignatura>) => {
   try {
     let xatAssignatura: Array<IXatAssignatura> = [];
     let promises: Promise<unknown>[] = [];
-    LlistaAssignatures.forEach(async (titol: any, index) => {
+    LlistaAssignatures.forEach(async (Assig) => {
       promises.push(
         new Promise((resolve) => {
-          XatAssignatura.findOne({ titol, grauID }).then((xatAssig) => {
+          XatAssignatura.findOne({ assignaturaID: Assig.nomComplet, grauID: Assig.grauID }).then((xatAssig) => {
             xatAssignatura.push(xatAssig);
             resolve(xatAssignatura);
           });
@@ -29,10 +37,9 @@ const getXats = async (LlistaAssignatures: Array<string>, grauID: string) => {
 };
 
 const getXatAssig: RequestHandler = async (req, res) => {
-  const { grauID, LlistaAssignatures } = req.body;
+  const { LlistaAssignatures } = req.body;
   try {
-    let xatAssignatura: Array<IXatAssignatura> = await getXats(LlistaAssignatures, grauID);
-    // console.log(xatAssignatura.values);
+    let xatAssignatura: Array<IXatAssignatura> = await getXats(LlistaAssignatures);
     return res.send({ xatAssignatura });
   } catch (error) {
     return res.send({ message: 'XatAssignatura not found' });

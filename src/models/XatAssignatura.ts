@@ -30,7 +30,6 @@ schema.plugin(xatGlobal);
 schema.plugin(xatGrup);
 schema.plugin(TimeStampPlugin);
 schema.index({ assignaturaID: 1, grauID: 1 }, { unique: true });
-schema.index({ titol: 1, grauID: 1 }, { unique: true });
 
 const XatAssignatura: IXatAssignaturaModel = model<IXatAssignatura, IXatAssignaturaModel>('XatAssignatura', schema);
 
