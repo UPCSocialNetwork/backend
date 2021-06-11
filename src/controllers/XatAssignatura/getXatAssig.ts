@@ -5,7 +5,7 @@ import { RequestHandler } from 'express';
 import requestMiddleware from '../../middleware/request-middleware';
 import XatAssignatura, { IXatAssignatura } from '../../models/XatAssignatura';
 
-const assert = require('assert');
+//const assert = require('assert');
 const allSettled = require('promise.allsettled');
 
 const getXats = async (LlistaAssignatures: Array<string>, grauID: string) => {
