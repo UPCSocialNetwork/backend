@@ -14,9 +14,13 @@ const options = {};
 
 const io = require('socket.io')(httpServer, options);
 
-io.on('connection', (socket: { on: (arg0: string, arg1: () => void) => void }) => {
-  socket.on('conectado', () => {
-    console.log('Usuario conectado');
+io.on('connection', (socket: { on: (arg0: string, arg1: (emisor: any) => void) => void }) => {
+  socket.on('connected', (emisor) => {
+    console.log(emisor);
+  });
+  socket.on('chat message', (message) => {
+    console.log(message);
+    io.emit('chat message', message);
   });
 });
 
