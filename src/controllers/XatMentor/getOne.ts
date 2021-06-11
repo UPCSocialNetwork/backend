@@ -3,10 +3,10 @@ import requestMiddleware from '../../middleware/request-middleware';
 import XatMentor, { IXatMentor } from '../../models/XatMentor';
 
 const getOne: RequestHandler = async (req, res) => {
-  const { mentorID } = req.params;
+  const { id } = req.params;
   let xatMentor: IXatMentor = null;
   try {
-    xatMentor = await XatMentor.findOne({ mentorID });
+    xatMentor = await XatMentor.findOne({ mentorID: id });
   } catch (error) {
     return res.send({ error });
   }
