@@ -13,16 +13,7 @@ const httpServer = require('http').createServer(app);
 const options = {};
 
 const io = require('socket.io')(httpServer, options);
-
-io.on('connection', (socket: { on: (arg0: string, arg1: (emisor: any) => void) => void }) => {
-  socket.on('connected', (emisor) => {
-    console.log(emisor);
-  });
-  socket.on('chat message', (message) => {
-    console.log(message);
-    io.emit('chat message', message);
-  });
-});
+require('./middleware/socket')(app, io);
 
 const { spawn } = require('child_process');
 

@@ -43,23 +43,23 @@ const getGrups: RequestHandler = async (req, res) => {
   let grups = [];
   for (let index = 0; index < nousXats.length; index++) {
     const element = nousXats[index][0];
-    grups.push([element.titol, element.ultimMissatgeID]);
+    grups.push([element._id, element.titol, element.ultimMissatgeID]);
   }
   if (!grups) return res.send({ message: 'Grups not found' });
   let xatsFinals: (string | number)[][] = [];
   try {
     for (let index = 0; index < grups.length; index++) {
       const element = grups[index];
-      await Missatge.findById({ _id: element[1] })
+      await Missatge.findById({ _id: element[2] })
         .then(async (response) => {
           await Participant.findById({ _id: response.participantID })
             .then((resp) => {
-              xatsFinals.push([element[0], response.text, response.updatedAt, resp.estudiantID]);
+              xatsFinals.push([element[0], element[1], response.text, response.updatedAt, resp.estudiantID]);
             })
             .catch((e) => {});
         })
         .catch(() => {
-          xatsFinals.push([element[0], 'Cap missatge', 404, '']);
+          xatsFinals.push([element[0], element[1], 'Cap missatge', 404, '']);
         });
     }
   } catch (e) {

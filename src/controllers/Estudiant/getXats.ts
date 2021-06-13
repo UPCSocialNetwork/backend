@@ -47,11 +47,11 @@ const getXats: RequestHandler = async (req, res) => {
       let count = await Participant.find({ xatID: element._id });
       if (count[0].estudiantID === id) {
         if (element.ultimMissatgeID) {
-          privats.push([count[1].estudiantID, element.ultimMissatgeID]);
+          privats.push([count[1].xatID, count[1].estudiantID, element.ultimMissatgeID]);
         }
       } else {
         if (element.ultimMissatgeID) {
-          privats.push([count[0].estudiantID, element.ultimMissatgeID]);
+          privats.push([count[0].xatID, count[0].estudiantID, element.ultimMissatgeID]);
         }
       }
     }
@@ -63,11 +63,12 @@ const getXats: RequestHandler = async (req, res) => {
   try {
     for (let index = 0; index < privats.length; index++) {
       const element = privats[index];
-      await Missatge.findById({ _id: element[1] })
+      await Missatge.findById({ _id: element[2] })
         .then(async (response) => {
           await Participant.findById({ _id: response.participantID })
             .then((resp) => {
-              xatsFinals.push([element[0], response.text, response.updatedAt, resp.estudiantID]);
+              // eslint-disable-next-line max-len
+              xatsFinals.push([element[0], element[1], response.text, response.updatedAt, resp.estudiantID]);
             })
             .catch((e) => {});
         })
