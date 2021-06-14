@@ -85,7 +85,7 @@ schema.methods.comparePassword = function (password: string): boolean {
 
 /** Returns a new JWT for the user instance */
 schema.methods.issueJsonWebToken = function (): string {
-  return jwt.sign(this.mail, process.env.TOKEN_SECRET, { algorithm: 'HS256' });
+  return jwt.sign(this.nomUsuari, process.env.TOKEN_SECRET, { algorithm: 'HS256' });
 };
 
 /** Exclude password field from being included in JSON responses */

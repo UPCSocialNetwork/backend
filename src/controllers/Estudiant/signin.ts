@@ -4,13 +4,13 @@ import requestMiddleware from '../../middleware/request-middleware';
 import Estudiant, { IEstudiant } from '../../models/Estudiant';
 
 export const signinEstudiantSchema = Joi.object().keys({
-  mail: Joi.string().required(),
+  nomUsuari: Joi.string().required(),
   contrasenya: Joi.string().required()
 });
 
 const signin: RequestHandler = async (req, res) => {
-  const { mail, contrasenya } = req.body;
-  const estudiant: IEstudiant = await Estudiant.findOne({ mail });
+  const { nomUsuari, contrasenya } = req.body;
+  const estudiant: IEstudiant = await Estudiant.findOne({ nomUsuari });
 
   if (!estudiant) return res.status(400).send();
   const isMatch = estudiant.comparePassword(contrasenya);
