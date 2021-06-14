@@ -15,6 +15,7 @@ import * as ParticipantController from './controllers/Participant';
 import * as MissatgeController from './controllers/Missatge';
 import * as EnquestaController from './controllers/Enquesta';
 import * as XatAssignatura from './controllers/XatAssignatura';
+import authentication from './middleware/authentication';
 
 const swaggerUiOptions = {
   customCss: '.swagger-ui .topbar { display: none }'
@@ -44,11 +45,11 @@ router.put('/cursada/update', CursadaController.update);
 router.delete('/cursada/delete', CursadaController.deleteCursada);
 
 // Participant rutes
-router.post('/participant/add', ParticipantController.add);
-router.get('/participant/getAll', ParticipantController.getAll);
+router.post('/participant', ParticipantController.add);
+router.get('/participant', ParticipantController.getAll);
 router.get('/participant/getOne', ParticipantController.getOne);
-router.put('/participant/update', ParticipantController.update);
-router.delete('/participant/delete', ParticipantController.deleteParticipant);
+router.put('/participant', ParticipantController.update);
+router.delete('/participant', ParticipantController.deleteParticipant);
 
 // Missatge rutes
 router.post('/missatge/add', MissatgeController.add);
@@ -74,7 +75,9 @@ router.put('/assignatura/update', AssignaturaController.update);
 router.delete('/assignatura/delete', AssignaturaController.deleteAssignatura);
 
 // Estudiant rutes
-router.post('/estudiant', EstudiantController.add);
+router.post('/estudiant/auth/signin', EstudiantController.signin);
+router.get('/estudiant/auth/session', authentication, (req, res) => res.send({ msg: 'Success' }));
+router.post('/estudiant/auth/signup', EstudiantController.signup);
 router.get('/estudiant', EstudiantController.getAll);
 router.get('/mentors', EstudiantController.getMentors);
 router.get('/estudiant/:id', EstudiantController.getOne);
@@ -82,6 +85,9 @@ router.get('/estudiant/xats/:id', EstudiantController.getXats);
 router.get('/estudiant/grups/:id', EstudiantController.getGrups);
 router.put('/estudiant/:id', EstudiantController.update);
 router.delete('/estudiant/:id', EstudiantController.deleteEstudiant);
+
+// Estudiant VerificationToken rutes
+router.get('/estudiant/verify/:token', EstudiantController.verify);
 
 // Xat rutes
 router.post('/Xat', Xat.add);
@@ -99,8 +105,9 @@ router.delete('/XatGrupal/:id', XatGrupal.deleteXatGrupal);
 
 // XatAssignatura rutes
 router.post('/XatAssignatura', XatAssignatura.add);
+router.post('/XatAssignatura/getXatAssig', XatAssignatura.getXatAssig);
 router.get('/XatAssignatura', XatAssignatura.getAll);
-router.get('/XatAssignatura/:id', XatAssignatura.getOne);
+router.get('/XatAssignatura/getOne', XatAssignatura.getOne);
 router.put('/XatAssignatura/:id', XatAssignatura.update);
 router.delete('/XatAssignatura/:id', XatAssignatura.deleteXatAssignatura);
 

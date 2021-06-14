@@ -65,7 +65,7 @@ for row in cur.fetchall():
         a["xatAssignaturaID"]=""
         a["LlistaEstudiants"]=[]
         b["delegatID"]="-"
-        b["titol"]="Xat de " + row[0]
+        b["titol"]=row[1].split('-')[0]
         b["descripcio"]="Aquest xat és el xat oficial de l'assignatura de " + row[0] + "."
         b["imatge"]="-"
         b["ultimMissatgeID"]="-"
