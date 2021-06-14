@@ -35,7 +35,7 @@ export interface IEstudiant extends ITimeStampedDocument {
 
   /**  Metodes Model */
   comparePassword(password: string): boolean;
-  issueJsonWebToken(): string;
+  issueJsonWebToken(): any;
 }
 
 interface IEstudiantModel extends Model<IEstudiant> {}
@@ -84,8 +84,12 @@ schema.methods.comparePassword = function (password: string): boolean {
 };
 
 /** Returns a new JWT for the user instance */
-schema.methods.issueJsonWebToken = function (): string {
-  return jwt.sign(this.nomUsuari, process.env.TOKEN_SECRET, { algorithm: 'HS256' });
+schema.methods.issueJsonWebToken = function (): any {
+  return jwt.sign({ nomUsuari: this.nomUsuari }, process.env.TOKEN_SECRET,
+    {
+      algorithm: 'HS256',
+      expiresIn: '24h'
+    });
 };
 
 /** Exclude password field from being included in JSON responses */

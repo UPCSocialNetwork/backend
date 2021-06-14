@@ -20,9 +20,12 @@ export const authentication = (req: Request, res: Response, next: NextFunction) 
   // The token is valid for 24 hours
   // We want to send a new token on every request
   const { userId } = jwtPayload;
-  const newToken = jwt.sign({ userId }, process.env.TOKEN_SECRET, {
-    expiresIn: '24h'
-  });
+  const newToken = jwt.sign({ userId }, process.env.TOKEN_SECRET,
+    {
+      algorithm: 'HS256',
+      expiresIn: '24h'
+    });
+
   res.setHeader('token', newToken);
 
   // Call the next middleware or controller

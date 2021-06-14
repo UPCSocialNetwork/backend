@@ -15,6 +15,7 @@ import * as ParticipantController from './controllers/Participant';
 import * as MissatgeController from './controllers/Missatge';
 import * as EnquestaController from './controllers/Enquesta';
 import * as XatAssignatura from './controllers/XatAssignatura';
+import authentication from './middleware/authentication';
 
 const swaggerUiOptions = {
   customCss: '.swagger-ui .topbar { display: none }'
@@ -74,6 +75,7 @@ router.delete('/assignatura/delete', AssignaturaController.deleteAssignatura);
 
 // Estudiant rutes
 router.post('/estudiant/auth/signin', EstudiantController.signin);
+router.get('/estudiant/auth/session', authentication, (req, res) => res.send({ msg: 'Success' }));
 router.post('/estudiant/auth/signup', EstudiantController.signup);
 router.get('/estudiant', EstudiantController.getAll);
 router.get('/mentors', EstudiantController.getMentors);
