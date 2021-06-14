@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-shadow */
 /* eslint-disable no-console */
 /* eslint-disable arrow-parens */
@@ -22,7 +23,7 @@ const getXats: RequestHandler = async (req, res) => {
     return res.send({ e });
   }
   if (!xats) return res.send({ message: 'Participant not found' });
-  // xats: todos los participantes de cesar
+  // xats: todos los participantes
   let nousXats: any[][] = [];
   try {
     for (let index = 0; index < xats.length; index++) {
@@ -39,7 +40,7 @@ const getXats: RequestHandler = async (req, res) => {
     return res.send({ e });
   }
   if (!nousXats) return res.send({ message: 'NouXat not found' });
-  // nousXats: todos los xats privados de Cesar
+  // nousXats: todos los xats privados
   let privats = [];
   try {
     for (let index = 0; index < nousXats.length; index++) {
@@ -47,11 +48,11 @@ const getXats: RequestHandler = async (req, res) => {
       let count = await Participant.find({ xatID: element._id });
       if (count[0].estudiantID === id) {
         if (element.ultimMissatgeID) {
-          privats.push([count[1].xatID, count[1].estudiantID, element.ultimMissatgeID]);
+          privats.push([count[1].xatID, count[0]._id, count[1].estudiantID, element.ultimMissatgeID]);
         }
       } else {
         if (element.ultimMissatgeID) {
-          privats.push([count[0].xatID, count[0].estudiantID, element.ultimMissatgeID]);
+          privats.push([count[0].xatID, count[1]._id, count[0].estudiantID, element.ultimMissatgeID]);
         }
       }
     }
@@ -63,12 +64,19 @@ const getXats: RequestHandler = async (req, res) => {
   try {
     for (let index = 0; index < privats.length; index++) {
       const element = privats[index];
-      await Missatge.findById({ _id: element[2] })
+      await Missatge.findById({ _id: element[3] })
         .then(async (response) => {
           await Participant.findById({ _id: response.participantID })
             .then((resp) => {
               // eslint-disable-next-line max-len
-              xatsFinals.push([element[0], element[1], response.text, response.updatedAt, resp.estudiantID]);
+              xatsFinals.push([
+                element[0],
+                element[1],
+                element[2],
+                response.text,
+                response.updatedAt,
+                resp.estudiantID
+              ]);
             })
             .catch((e) => {});
         })

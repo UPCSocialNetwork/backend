@@ -32,9 +32,18 @@ const getGrups: RequestHandler = async (req, res) => {
       let tancats = await XatGrupTancat.find({ _id: element.xatID });
       let assigs = await XatAssignatura.find({ _id: element.xatID });
       let mentors = await XatMentor.find({ _id: element.xatID });
-      if (tancats.length > 0) nousXats.push(tancats);
-      if (assigs.length > 0) nousXats.push(assigs);
-      if (mentors.length > 0) nousXats.push(mentors);
+      if (tancats.length > 0) {
+        tancats.push(element._id);
+        nousXats.push(tancats);
+      }
+      if (assigs.length > 0) {
+        assigs.push(element._id);
+        nousXats.push(assigs);
+      }
+      if (mentors.length > 0) {
+        mentors.push(element._id);
+        nousXats.push(mentors);
+      }
     }
   } catch (e) {
     return res.send({ e });
@@ -43,7 +52,7 @@ const getGrups: RequestHandler = async (req, res) => {
   let grups = [];
   for (let index = 0; index < nousXats.length; index++) {
     const element = nousXats[index][0];
-    grups.push([element._id, element.titol, element.ultimMissatgeID]);
+    grups.push([element._id, element.titol, element.ultimMissatgeID, nousXats[index][1]]);
   }
   if (!grups) return res.send({ message: 'Grups not found' });
   let xatsFinals: (string | number)[][] = [];
@@ -54,12 +63,19 @@ const getGrups: RequestHandler = async (req, res) => {
         .then(async (response) => {
           await Participant.findById({ _id: response.participantID })
             .then((resp) => {
-              xatsFinals.push([element[0], element[1], response.text, response.updatedAt, resp.estudiantID]);
+              xatsFinals.push([
+                element[0],
+                element[3],
+                element[1],
+                response.text,
+                response.updatedAt,
+                resp.estudiantID
+              ]);
             })
             .catch((e) => {});
         })
         .catch(() => {
-          xatsFinals.push([element[0], element[1], 'Cap missatge', 404, '']);
+          xatsFinals.push([element[0], element[3], element[1], 'Cap missatge', 404, '']);
         });
     }
   } catch (e) {

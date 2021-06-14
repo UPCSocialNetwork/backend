@@ -1,3 +1,4 @@
+/* eslint-disable prefer-template */
 /* eslint-disable no-shadow */
 /* eslint-disable arrow-parens */
 /* eslint-disable max-len */
@@ -6,17 +7,20 @@
 module.exports = (
   app: any,
   io: {
-    on: (arg0: string, arg1: (socket: { on: (arg0: string, arg1: (emisor: any) => void) => void }) => void) => void;
+    on: (arg0: string, arg1: (socket: any) => void) => void;
+    emit: (arg0: string, arg1: any) => void;
+    to: (arg0: any) => { (): any; new (): any; emit: { (arg0: string, arg1: any): void; new (): any } };
   }
 ) => {
-  io.on('connection', (socket: { on: (arg0: string, arg1: (emisor: any, room: any) => void) => void }) => {
-    socket.on('connected', (emisor: any, room: any) => {
-      console.log(`${emisor} connected at ${room}`);
+  io.on('connection', (socket) => {
+    socket.on('xat actiu', (emisor: any, room: any, participant: any) => {
+      console.log(`${emisor} connected at room ${room} with this participantID: ${participant}`);
+      socket.join(room);
     });
 
-    /* socket.on('chat message', (message) => {
-        console.log(message);
-        io.emit('chat message', message);
-      });*/
+    socket.on('send message', (message: any, roomID: any) => {
+      // console.log('socket rooms2: ' + socket.rooms.has(roomID));
+      io.to(roomID).emit('send message', message);
+    });
   });
 };
