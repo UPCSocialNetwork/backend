@@ -55,6 +55,7 @@ router.delete('/participant', ParticipantController.deleteParticipant);
 router.post('/missatge/add', MissatgeController.add);
 router.get('/missatge/getAll', MissatgeController.getAll);
 router.get('/missatge/getOne', MissatgeController.getOne);
+router.get('/missatge/xat/:id', MissatgeController.getXat);
 router.put('/missatge/update', MissatgeController.update);
 router.delete('/missatge/delete', MissatgeController.deleteMissatge);
 

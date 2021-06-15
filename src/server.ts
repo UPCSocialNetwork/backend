@@ -1,9 +1,19 @@
+/* eslint-disable no-console */
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable arrow-parens */
 /* eslint-disable import/first */
 import dotenv from 'dotenv';
 import util from 'util';
 import app from './app';
 import SafeMongooseConnection from './lib/safe-mongoose-connection';
 import logger from './logger';
+
+const httpServer = require('http').createServer(app);
+
+const options = {};
+
+const io = require('socket.io')(httpServer, options);
+require('./middleware/socket')(app, io);
 
 const { spawn } = require('child_process');
 
@@ -31,31 +41,33 @@ if (process.env.NODE_ENV === 'development') {
 const safeMongooseConnection = new SafeMongooseConnection({
   mongoUrl: process.env.MONGO_URL,
   debugCallback,
-  onStartConnection: mongoUrl => logger.info(`Connecting to MongoDB at ${mongoUrl}`),
-  onConnectionError: (error, mongoUrl) => logger.log({
-    level: 'error',
-    message: `Could not connect to MongoDB at ${mongoUrl}`,
-    error
-  }),
-  onConnectionRetry: mongoUrl => logger.info(`Retrying to MongoDB at ${mongoUrl}`)
+  onStartConnection: (mongoUrl) => logger.info(`Connecting to MongoDB at ${mongoUrl}`),
+  onConnectionError: (error, mongoUrl) =>
+    logger.log({
+      level: 'error',
+      message: `Could not connect to MongoDB at ${mongoUrl}`,
+      error
+    }),
+  onConnectionRetry: (mongoUrl) => logger.info(`Retrying to MongoDB at ${mongoUrl}`)
 });
 
-const serve = () => app.listen(PORT, () => {
-  logger.debug(`🌏 Express server started at http://localhost:${PORT}`);
+const serve = () =>
+  httpServer.listen(PORT, () => {
+    logger.debug(`🌏 Express server started at http://localhost:${PORT}`);
 
-  if (process.env.NODE_ENV === 'development') {
-    // This route is only present in development mode
-    logger.debug(`⚙️  Swagger UI hosted at http://localhost:${PORT}/dev/api-docs`);
-  }
-});
+    if (process.env.NODE_ENV === 'development') {
+      // This route is only present in development mode
+      logger.debug(`⚙️  Swagger UI hosted at http://localhost:${PORT}/dev/api-docs`);
+    }
+  });
 
 if (process.env.MONGO_URL == null) {
   logger.error('MONGO_URL not specified in environment');
   process.exit(1);
 } else {
-  safeMongooseConnection.connect(mongoUrl => {
+  safeMongooseConnection.connect((mongoUrl) => {
     logger.info(`Connected to MongoDB at ${mongoUrl}`);
-    script.stdout.on('data', (data: { toString: () => any; }) => { });
+    script.stdout.on('data', (data: { toString: () => any }) => {});
     serve();
   });
 }
@@ -65,7 +77,7 @@ process.on('SIGINT', () => {
   console.log('\n'); /* eslint-disable-line */
   logger.info('Gracefully shutting down');
   logger.info('Closing the MongoDB connection');
-  safeMongooseConnection.close(err => {
+  safeMongooseConnection.close((err) => {
     if (err) {
       logger.log({
         level: 'error',
