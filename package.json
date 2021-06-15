@@ -1,10 +1,10 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "TypeScript-Express boilerplate",
+  "description": "OnCampusApp",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sidhantpanda/express-typescript-boilerplate.git"
+    "url": "git+https://github.com/UPCSocialNetwork/backend.git"
   },
   "keywords": [
     "TypeScript",
@@ -75,7 +75,7 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sidhantpanda/docker-express-typescript-boilerplate/issues"
+    "url": "https://github.com/UPCSocialNetwork/backend.git/issues"
   },
-  "homepage": "https://github.com/sidhantpanda/docker-express-typescript-boilerplate#readme"
+  "homepage": "https://github.com/UPCSocialNetwork/backend.git#readme"
 }
