@@ -2,7 +2,7 @@ import { RequestHandler } from 'express';
 import Joi from '@hapi/joi';
 import requestMiddleware from '../../middleware/request-middleware';
 import Estudiant, { IEstudiant } from '../../models/Estudiant';
-import { addEstudiantSchema } from './add';
+import { registerEstudiantSchema } from './signup';
 
 export const updateEstudiantSchema = Joi.object().keys({
   mail: Joi.string().required(),
