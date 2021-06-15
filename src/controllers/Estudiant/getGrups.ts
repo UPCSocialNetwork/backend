@@ -26,6 +26,7 @@ const getGrups: RequestHandler = async (req, res) => {
   }
   if (!xats) return res.send({ message: 'Participant not found' });
   let nousXats = [];
+  let tipusXats = [];
   try {
     for (let index = 0; index < xats.length; index++) {
       const element = xats[index];
@@ -35,14 +36,17 @@ const getGrups: RequestHandler = async (req, res) => {
       if (tancats.length > 0) {
         tancats.push(element._id);
         nousXats.push(tancats);
+        tipusXats.push('XatGrupTancat');
       }
       if (assigs.length > 0) {
         assigs.push(element._id);
         nousXats.push(assigs);
+        tipusXats.push('XatAssignatura');
       }
       if (mentors.length > 0) {
         mentors.push(element._id);
         nousXats.push(mentors);
+        tipusXats.push('XatMentor');
       }
     }
   } catch (e) {
@@ -52,7 +56,7 @@ const getGrups: RequestHandler = async (req, res) => {
   let grups = [];
   for (let index = 0; index < nousXats.length; index++) {
     const element = nousXats[index][0];
-    grups.push([element._id, element.titol, element.ultimMissatgeID, nousXats[index][1]]);
+    grups.push([element._id, element.titol, element.ultimMissatgeID, nousXats[index][1], tipusXats[index]]);
   }
   if (!grups) return res.send({ message: 'Grups not found' });
   let xatsFinals: (string | number)[][] = [];
@@ -69,13 +73,14 @@ const getGrups: RequestHandler = async (req, res) => {
                 element[1],
                 response.text,
                 response.updatedAt,
-                resp.estudiantID
+                resp.estudiantID,
+                element[4]
               ]);
             })
             .catch((e) => {});
         })
         .catch(() => {
-          xatsFinals.push([element[0], element[3], element[1], 'Cap missatge', 404, '']);
+          xatsFinals.push([element[0], element[3], element[1], 'Cap missatge', 404, '', element[4]]);
         });
     }
   } catch (e) {

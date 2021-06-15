@@ -22,7 +22,7 @@ const xat: RequestHandler = async (req, res) => {
     for (let i = 0; i < participants.length; i++) {
       const element = participants[i];
       let miss = await Missatge.find({ participantID: element._id });
-      if (miss.length > 0) missatges.push(miss);
+      if (miss.length > 0) missatges.push([element.estudiantID, miss]);
     }
   } catch (e) {
     return res.send({ e });
