@@ -14,7 +14,7 @@ module.exports = (
 ) => {
   io.on('connection', (socket) => {
     socket.on('xat actiu', (room: any) => {
-      // console.log(`${emisor} connected at room ${room} with this participantID: ${participant}`);
+      // console.log(`Connected at room ${room}`);
       socket.join(room);
     });
 

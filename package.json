@@ -46,6 +46,7 @@
     "nodemailer": "^6.6.1",
     "nodemailer-express-handlebars": "^4.0.0",
     "promise.allsettled": "^1.0.4",
+    "semver": "^7.3.5",
     "socket.io": "^4.1.2",
     "swagger-ui-express": "4.1.6",
     "winston": "3.3.3",
