@@ -9,18 +9,29 @@ module.exports = (
   io: {
     on: (arg0: string, arg1: (socket: any) => void) => void;
     emit: (arg0: string, arg1: any) => void;
-    to: (arg0: any) => { (): any; new (): any; emit: { (arg0: string, arg1: any): void; new (): any } };
+    to: (arg0: any) => { (): any; new (): any; emit: { (arg0: string, arg1: any, arg2: any): void; new (): any } };
   }
 ) => {
   io.on('connection', (socket) => {
     socket.on('xat actiu', (room: any) => {
-      // console.log(`Connected at room ${room}`);
       socket.join(room);
     });
 
     socket.on('send message', (message: any, roomID: any) => {
-      // console.log('socket rooms2: ' + socket.rooms.has(roomID));
-      io.to(roomID).emit('send message', message);
+      io.to(roomID).emit('send message', message, roomID);
+    });
+
+    socket.on('listXat ready', (nom: any) => {
+      // console.log('Usuari: ' + nom);
+      socket.join(nom);
+      // io.to(nom).emit('refresh list', )
+    });
+
+    socket.on('refresh list', (message: any, nom: any, roomID: any) => {
+      // console.log('refresca socio');
+      // console.log('nom: ' + nom);
+      // console.log(socket.rooms);
+      io.to(nom).emit('update message', message, roomID);
     });
   });
 };
