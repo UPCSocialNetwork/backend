@@ -13,18 +13,16 @@ export const updateXatSchema = Joi.object().keys({
 const update: RequestHandler = async (req, res) => {
   const { id } = req.params;
   const { ultimMissatgeID } = req.body;
-  let xat: IXat = null;
+  let xat = null;
   try {
-    xat = await Xat.findById({ _id: id });
-    xat.ultimMissatgeID = ultimMissatgeID;
-    await xat.save();
+    xat = await Xat.updateOne({ _id: id }, { $set: { ultimMissatgeID } });
   } catch (e) {
     return res.send({ message: e });
   }
   if (!xat) return res.send({ message: 'Xat not found' });
   return res.send({
     message: 'Updated Xat',
-    Xat: xat.toJSON()
+    Xat: xat
   });
 };
 

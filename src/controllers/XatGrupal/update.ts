@@ -6,32 +6,24 @@ import XatGrupal, { IXatGrupal } from '../../models/XatGrupal';
 const Joi = require('@hapi/joi');
 Joi.objectId = require('joi-objectid')(Joi);
 
-export const updateXatGrupalSchema = Joi.object().keys({
-  titol: Joi.string(),
-  descripcio: Joi.string(),
-  imatge: Joi.string(),
-  ultimMissatgeID: Joi.string()
+export const updateXatSchema = Joi.object().keys({
+  ultimMissatgeID: Joi.string().required()
 });
 
 const update: RequestHandler = async (req, res) => {
   const { id } = req.params;
-  const { titol, descripcio, imatge, ultimMissatgeID } = req.body;
-  let xatGrupal: IXatGrupal = null;
+  const { ultimMissatgeID } = req.body;
+  let xatGrupal = null;
   try {
-    xatGrupal = await XatGrupal.findById({ _id: id });
-    xatGrupal.titol = titol;
-    xatGrupal.descripcio = descripcio;
-    xatGrupal.imatge = imatge;
-    xatGrupal.ultimMissatgeID = ultimMissatgeID;
-    await xatGrupal.save();
+    xatGrupal = await XatGrupal.updateOne({ _id: id }, { $set: { ultimMissatgeID } });
   } catch (e) {
     return res.send({ message: e });
   }
   if (!xatGrupal) return res.send({ message: 'XatGrupal not found' });
   return res.send({
     message: 'Updated XatGrupal',
-    XatGrupal: xatGrupal.toJSON()
+    XatGrupal: xatGrupal
   });
 };
 
-export default requestMiddleware(update, { validation: { body: updateXatGrupalSchema } });
+export default requestMiddleware(update, { validation: { body: updateXatSchema } });

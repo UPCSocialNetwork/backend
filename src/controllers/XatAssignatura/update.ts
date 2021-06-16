@@ -6,38 +6,24 @@ import XatAssignatura, { IXatAssignatura } from '../../models/XatAssignatura';
 const Joi = require('@hapi/joi');
 Joi.objectId = require('joi-objectid')(Joi);
 
-export const updateXatAssignaturaSchema = Joi.object().keys({
-  guiaDocent: Joi.string(),
-  mailProfessor: Joi.array(),
-  delegatID: Joi.string(),
-  titol: Joi.string(),
-  descripcio: Joi.string(),
-  imatge: Joi.string(),
-  ultimMissatgeID: Joi.string()
+export const updateXatSchema = Joi.object().keys({
+  ultimMissatgeID: Joi.string().required()
 });
 
 const update: RequestHandler = async (req, res) => {
   const { id } = req.params;
-  const { guiaDocent, mailProfessor, delegatID, titol, descripcio, imatge, ultimMissatgeID } = req.body;
-  let xatAssignatura: IXatAssignatura = null;
+  const { ultimMissatgeID } = req.body;
+  let xatAssignatura = null;
   try {
-    xatAssignatura = await XatAssignatura.findById({ _id: id });
-    xatAssignatura.guiaDocent = guiaDocent;
-    xatAssignatura.mailProfessor = mailProfessor;
-    xatAssignatura.delegatID = delegatID;
-    xatAssignatura.titol = titol;
-    xatAssignatura.descripcio = descripcio;
-    xatAssignatura.imatge = imatge;
-    xatAssignatura.ultimMissatgeID = ultimMissatgeID;
-    await xatAssignatura.save();
+    xatAssignatura = await XatAssignatura.updateOne({ _id: id }, { $set: { ultimMissatgeID } });
   } catch (e) {
     return res.send({ message: e });
   }
   if (!xatAssignatura) return res.send({ message: 'XatAssignatura not found' });
   return res.send({
     message: 'Updated XatAssignatura',
-    XatAssignatura: xatAssignatura.toJSON()
+    XatAssignatura: xatAssignatura
   });
 };
 
-export default requestMiddleware(update, { validation: { body: updateXatAssignaturaSchema } });
+export default requestMiddleware(update, { validation: { body: updateXatSchema } });

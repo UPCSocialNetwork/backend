@@ -3,7 +3,7 @@ import TimeStampPlugin from './plugins/timestamp-plugin';
 import { IXat, xatGlobal } from './Xat';
 
 export interface IXatGrupal extends IXat {
-  /** TItol del XatGrupal */
+  /** Titol del XatGrupal */
   titol: string;
   /** Descripcio del XatGrupal */
   descripcio: string;

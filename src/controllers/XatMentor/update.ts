@@ -5,34 +5,24 @@ import XatMentor, { IXatMentor } from '../../models/XatMentor';
 const Joi = require('@hapi/joi');
 Joi.objectId = require('joi-objectid')(Joi);
 
-export const updateXatMentorSchema = Joi.object().keys({
-  mentorID: Joi.string(),
-  titol: Joi.string(),
-  descripcio: Joi.string(),
-  imatge: Joi.string(),
-  ultimMissatgeID: Joi.string()
+export const updateXatSchema = Joi.object().keys({
+  ultimMissatgeID: Joi.string().required()
 });
 
 const update: RequestHandler = async (req, res) => {
   const { id } = req.params;
-  const { mentorID, titol, descripcio, imatge, ultimMissatgeID } = req.body;
-  let xatMentor: IXatMentor = null;
+  const { ultimMissatgeID } = req.body;
+  let xatMentor = null;
   try {
-    xatMentor = await XatMentor.findById({ _id: id });
-    xatMentor.mentorID = mentorID;
-    xatMentor.titol = titol;
-    xatMentor.descripcio = descripcio;
-    xatMentor.imatge = imatge;
-    xatMentor.ultimMissatgeID = ultimMissatgeID;
-    await xatMentor.save();
+    xatMentor = await XatMentor.updateOne({ _id: id }, { $set: { ultimMissatgeID } });
   } catch (e) {
     return res.send({ message: e });
   }
   if (!xatMentor) return res.send({ message: 'XatMentor not found' });
   return res.send({
     message: 'Updated XatMentor',
-    XatMentor: xatMentor.toJSON()
+    XatMentor: xatMentor
   });
 };
 
-export default requestMiddleware(update, { validation: { body: updateXatMentorSchema } });
+export default requestMiddleware(update, { validation: { body: updateXatSchema } });
