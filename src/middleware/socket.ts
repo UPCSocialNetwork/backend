@@ -15,7 +15,9 @@ module.exports = (
 ) => {
   io.on('connection', (socket) => {
     socket.on('xat actiu', (room: any) => {
+      // falta verificar grupos
       socket.join(room);
+      console.log('XATS ACTIUS: ');
       console.log(io.sockets.adapter.rooms);
     });
 
@@ -25,25 +27,28 @@ module.exports = (
 
     socket.on('listXat ready', (nom: any) => {
       // console.log(nom + ' ready');
-      socket.join(nom);
       socket.leave(socket.id);
+      socket.join(nom);
       console.log(io.sockets.adapter.rooms);
-      io.to(nom).emit('listening', true, true);
+      // io.to(nom).emit('listening', true, true);
     });
 
     socket.on('refresh list', (message: any, nom: any, roomID: any) => {
       // console.log('refresca socio');
       // console.log('nom: ' + nom);
-      console.log(io.sockets.adapter.rooms.get(nom).size);
+      // console.log(io.sockets.adapter.rooms.get(nom));
       // console.log(socket.adapter.rooms);
       // console.log('--------------');
       // console.log(socket.adapter.sids);
-      socket.to(nom).emit('update message', message, roomID);
+      io.to(nom).emit('update message', message, roomID);
       // io.to(nom).emit('listening', true, true);
     });
     socket.on('leave', (roomID: any) => {
       socket.leave(roomID);
       console.log(io.sockets.adapter.rooms);
+    });
+    socket.on('listeners', () => {
+      socket.removeAllListeners();
     });
     socket.on('disconnect', (reason: string) => {
       console.log(reason);
