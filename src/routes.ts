@@ -82,6 +82,7 @@ router.get('/estudiant', EstudiantController.getAll);
 router.get('/mentors', EstudiantController.getMentors);
 router.get('/estudiant/:id', EstudiantController.getOne);
 router.get('/estudiant/xats/:id', EstudiantController.getXats);
+router.get('/estudiants/:id', EstudiantController.getEstudiants);
 router.get('/estudiant/grups/:id', EstudiantController.getGrups);
 router.put('/estudiant/:id', EstudiantController.update);
 router.delete('/estudiant/:id', EstudiantController.deleteEstudiant);

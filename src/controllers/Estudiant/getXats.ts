@@ -75,7 +75,8 @@ const getXats: RequestHandler = async (req, res) => {
                 element[2],
                 response.text,
                 response.updatedAt,
-                resp.estudiantID
+                resp.estudiantID,
+                'privs'
               ]);
             })
             .catch((e) => {});

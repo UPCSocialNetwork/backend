@@ -7,7 +7,20 @@ import getOne from './getOne';
 import update from './update';
 import deleteEstudiant from './delete';
 import getXats from './getXats';
+import getEstudiants from './getEstudiants';
 import getGrups from './getGrups';
 import getMentors from './getMentors';
 
-export { signup, signin, verify, getAll, getOne, update, deleteEstudiant, getXats, getGrups, getMentors };
+export {
+  signup,
+  signin,
+  verify,
+  getAll,
+  getOne,
+  update,
+  deleteEstudiant,
+  getXats,
+  getEstudiants,
+  getGrups,
+  getMentors
+};
