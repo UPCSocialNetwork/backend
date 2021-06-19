@@ -53,6 +53,7 @@ const safeMongooseConnection = new SafeMongooseConnection({
 
 const serve = () =>
   httpServer.listen(PORT, () => {
+    console.log('Express Server Started!');
     logger.debug(`🌏 Express server started at http://localhost:${PORT}`);
 
     if (process.env.NODE_ENV === 'development') {
@@ -66,6 +67,7 @@ if (process.env.MONGO_URL == null) {
   process.exit(1);
 } else {
   safeMongooseConnection.connect((mongoUrl) => {
+    console.log(`Connected to MongoDB at ${mongoUrl}`);
     logger.info(`Connected to MongoDB at ${mongoUrl}`);
     script.stdout.on('data', (data: { toString: () => any }) => {});
     serve();

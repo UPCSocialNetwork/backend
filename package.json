@@ -49,6 +49,7 @@
     "semver": "^7.3.5",
     "socket.io": "^4.1.2",
     "swagger-ui-express": "4.1.6",
+    "ts-node-dev": "^1.1.6",
     "winston": "3.3.3",
     "winston-transport": "4.4.0"
   },
