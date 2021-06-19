@@ -84,7 +84,7 @@ x.write(xatAssig)
 db.close()
 
 try:
-    conn = MongoClient('mongodb://host.docker.internal:27017/OnCampus')
+    conn = MongoClient("mongodb://localhost:27017/OnCampus")
     print("Connected successfully!!!")
 except:  
     print("Could not connect to MongoDB")
