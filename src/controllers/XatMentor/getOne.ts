@@ -6,7 +6,7 @@ const getOne: RequestHandler = async (req, res) => {
   const { id } = req.params;
   let xatMentor: IXatMentor = null;
   try {
-    xatMentor = await XatMentor.findOne({ mentorID: id });
+    xatMentor = await XatMentor.findById({ _id: id });
   } catch (error) {
     return res.send({ error });
   }
