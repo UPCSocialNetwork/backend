@@ -111,6 +111,7 @@ router.post('/XatAssignatura', XatAssignatura.add);
 router.post('/XatAssignatura/getXatAssig', XatAssignatura.getXatAssig);
 router.get('/XatAssignatura', XatAssignatura.getAll);
 router.get('/XatAssignatura/getOne', XatAssignatura.getOne);
+router.get('/XatAssignatura/getOneID/:id', XatAssignatura.getOneID);
 router.put('/XatAssignatura/:id', XatAssignatura.update);
 router.delete('/XatAssignatura/:id', XatAssignatura.deleteXatAssignatura);
 
