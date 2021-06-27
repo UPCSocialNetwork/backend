@@ -47,7 +47,7 @@ router.delete('/cursada/delete', CursadaController.deleteCursada);
 // Participant rutes
 router.post('/participant', ParticipantController.add);
 router.get('/participant', ParticipantController.getAll);
-router.get('/participant/getOne', ParticipantController.getOne);
+router.get('/participant/:est/:xat', ParticipantController.getOne);
 router.put('/participant', ParticipantController.update);
 router.delete('/participant', ParticipantController.deleteParticipant);
 router.delete('/participant/xat/:id', ParticipantController.deleteParticipantXat);
@@ -98,6 +98,7 @@ router.get('/Xat', Xat.getAll);
 router.get('/Xat/:id', Xat.getOne);
 router.put('/Xat/:id', Xat.update);
 router.delete('/Xat/:id', Xat.deleteXat);
+router.get('/Xat/Parts/:nom1/:nom2', Xat.getXatParts);
 
 // XatGrupal rutes
 router.post('/XatGrupal', XatGrupal.add);
