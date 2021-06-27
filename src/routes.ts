@@ -50,6 +50,7 @@ router.get('/participant', ParticipantController.getAll);
 router.get('/participant/getOne', ParticipantController.getOne);
 router.put('/participant', ParticipantController.update);
 router.delete('/participant', ParticipantController.deleteParticipant);
+router.delete('/participant/xat/:id', ParticipantController.deleteParticipantXat);
 
 // Missatge rutes
 router.post('/missatge/add', MissatgeController.add);
@@ -58,6 +59,7 @@ router.get('/missatge/getOne', MissatgeController.getOne);
 router.get('/missatge/xat/:id', MissatgeController.getXat);
 router.put('/missatge/update', MissatgeController.update);
 router.delete('/missatge/delete', MissatgeController.deleteMissatge);
+router.delete('/missatge/xat/:id', MissatgeController.deleteMissatgeXat);
 
 // Enquesta rutes
 router.post('/enquesta/add', EnquestaController.add);
