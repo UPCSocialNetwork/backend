@@ -18,11 +18,11 @@ const add: RequestHandler = async (req, res) => {
     return res.send({
       message: e
     });
-  };
+  }
 
   return res.send({
     message: 'Saved',
-    Grau: missatge.toJSON()
+    Missatge: missatge.toJSON()
   });
 };
 

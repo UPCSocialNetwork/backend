@@ -1,14 +1,14 @@
 import { RequestHandler } from 'express';
 import requestMiddleware from '../../middleware/request-middleware';
-import Assignatura from '../../models/Assignatura';
+import Assignatura, { IAssignatura } from '../../models/Assignatura';
 
 const all: RequestHandler = async (req, res) => {
-  let assignatura = null;
+  let assignatura: IAssignatura[] = null;
   try {
     assignatura = await Assignatura.find();
   } catch (e) {
     return res.send({ message: e });
-  };
+  }
   return res.send({ assignatura });
 };
 

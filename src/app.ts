@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import bodyParser from 'body-parser';
 import compression from 'compression';
 import path from 'path';
@@ -6,7 +7,11 @@ import ApplicationError from './errors/application-error';
 import routes from './routes';
 import logger from './logger';
 
+const cors = require('cors');
+
 const app = express();
+
+app.use(cors());
 
 function logResponseTime(req: Request, res: Response, next: NextFunction) {
   const startHrTime = process.hrtime();
@@ -26,7 +31,6 @@ function logResponseTime(req: Request, res: Response, next: NextFunction) {
 }
 
 app.use(logResponseTime);
-
 app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

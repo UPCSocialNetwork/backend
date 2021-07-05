@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .card {
+      border-width: 1px;
+      border-style: solid;
+      border-color: #E0E0E0;
+      border-radius: 3px;
+      padding: 16px;
+      max-width: 512px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .title {
+      color: #202124;
+      width: 100%;
+    }
+    ul {
+      color: #202124;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="title">
+      <h2> El usuario {{user}} ha registrado un nuevo evento del tipo {{user}}</h2>
+      <a href="http://localhost:3000/user/verify/{{token}}" >VERIFICAR</a>
+    </div>
+  
+    <strong>Detalles del evento</strong>
+    <ul>
+      <li> <strong>Empresa: </strong> {{user}}</li>
+      <li> <strong>Motivo del evento: </strong>  {{user}}</li>
+      <li> <strong>Descripción: </strong>  {{user}}</li>
+      <li> <strong>Asignado/Resolutor: </strong> {{user}}</li>
+      <li> <strong>Fecha en la que ocurrió el evento: </strong> {{user}}</li>
+      <li> <strong>Fecha de creación del evento: </strong> {{user}}</li>
+    </ul>
+    <br> <br>
+    <div style="color: #757575; margin-left: auto;  margin-right: auto; text-align: center;">
+      <small>⚡ Email generado automáticamente, favor no responder ⚡</small> <br>
+      <small>Hola - 2020</small>
+    </div>
+  </div>
+</body>
+</html>

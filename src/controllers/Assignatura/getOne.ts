@@ -3,10 +3,10 @@ import requestMiddleware from '../../middleware/request-middleware';
 import Assignatura, { IAssignatura } from '../../models/Assignatura';
 
 const getOne: RequestHandler = async (req, res) => {
-  const { nomSigles } = req.body;
+  const { nomComplet, grauID } = req.body;
   let assignatura: IAssignatura = null;
   try {
-    assignatura = await Assignatura.findOne({ nomSigles });
+    assignatura = await Assignatura.findOne({ nomComplet, grauID });
   } catch (e) {
     return res.send({ e });
   };
