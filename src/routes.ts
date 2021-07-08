@@ -47,9 +47,10 @@ router.delete('/cursada/delete', CursadaController.deleteCursada);
 // Participant rutes
 router.post('/participant', ParticipantController.add);
 router.get('/participant', ParticipantController.getAll);
-router.get('/participant/getOne', ParticipantController.getOne);
+router.get('/participant/:est/:xat', ParticipantController.getOne);
 router.put('/participant', ParticipantController.update);
 router.delete('/participant', ParticipantController.deleteParticipant);
+router.delete('/participant/xat/:id', ParticipantController.deleteParticipantXat);
 
 // Missatge rutes
 router.post('/missatge/add', MissatgeController.add);
@@ -58,6 +59,7 @@ router.get('/missatge/getOne', MissatgeController.getOne);
 router.get('/missatge/xat/:id', MissatgeController.getXat);
 router.put('/missatge/update', MissatgeController.update);
 router.delete('/missatge/delete', MissatgeController.deleteMissatge);
+router.delete('/missatge/xat/:id', MissatgeController.deleteMissatgeXat);
 
 // Enquesta rutes
 router.post('/enquesta/add', EnquestaController.add);
@@ -96,6 +98,7 @@ router.get('/Xat', Xat.getAll);
 router.get('/Xat/:id', Xat.getOne);
 router.put('/Xat/:id', Xat.update);
 router.delete('/Xat/:id', Xat.deleteXat);
+router.get('/Xat/Parts/:nom1/:nom2', Xat.getXatParts);
 
 // XatGrupal rutes
 router.post('/XatGrupal', XatGrupal.add);
@@ -109,6 +112,7 @@ router.post('/XatAssignatura', XatAssignatura.add);
 router.post('/XatAssignatura/getXatAssig', XatAssignatura.getXatAssig);
 router.get('/XatAssignatura', XatAssignatura.getAll);
 router.get('/XatAssignatura/getOne', XatAssignatura.getOne);
+router.get('/XatAssignatura/getOneID/:id', XatAssignatura.getOneID);
 router.put('/XatAssignatura/:id', XatAssignatura.update);
 router.delete('/XatAssignatura/:id', XatAssignatura.deleteXatAssignatura);
 
