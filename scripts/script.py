@@ -23,6 +23,7 @@ for row in cur.fetchall():
     objects_list.append(c)
 
 centre = json.dumps(objects_list)
+print(centre)
 f = open("./scripts/centreData.json","w+")
 f.write(centre)
 
