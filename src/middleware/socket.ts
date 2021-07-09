@@ -18,7 +18,7 @@ module.exports = (
       socket.join(room);
     });
     socket.on('send message', (message: any, roomID: any) => {
-      io.to(roomID).emit('send message', message, roomID);
+      socket.broadcast.to(roomID).emit('send message', message, roomID);
     });
     socket.on('listXat ready', (nom: any) => {
       socket.leave(socket.id);
