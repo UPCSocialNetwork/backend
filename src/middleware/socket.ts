@@ -29,8 +29,8 @@ module.exports = (
     socket.on('refresh list', (message: any, nom: any, roomID: any) => {
       io.to(nom).emit('update message', message, roomID);
     });
-    socket.on('new chat', (nom: any) => {
-      io.to(nom).emit('new chat', null, null);
+    socket.on('new chat', (nom: any, xatID: any) => {
+      io.to(nom).emit('new chat', xatID, null);
     });
     socket.on('leave', (roomID: any) => {
       socket.leave(roomID);
