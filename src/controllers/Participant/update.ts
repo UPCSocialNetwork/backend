@@ -5,16 +5,20 @@ import { addParticipantSchema } from './add';
 
 const update: RequestHandler = async (req, res) => {
   const { estudiantID, xatID, ultimaLectura, notificacions, bloqueigGrup } = req.body;
-  let participant : IParticipant = null;
+  const participant: IParticipant = null;
   try {
-    participant = await Participant.findOne({ estudiantID, xatID });
+    // eslint-disable-next-line no-shadow
+    const participant = await Participant.findOne({ estudiantID, xatID });
     participant.estudiantID = estudiantID;
     participant.xatID = xatID;
-    participant.ultimaLectura = ultimaLectura;
+    if (ultimaLectura === 0) participant.ultimaLectura = 0;
+    else participant.ultimaLectura += 1;
     participant.notificacions = notificacions;
     participant.bloqueigGrup = bloqueigGrup;
     await participant.save();
-  } catch (e) { return res.send({ message: e }); };
+  } catch (e) {
+    return res.send({ message: e });
+  }
   if (!participant) return res.send({ message: 'Participant not found' });
   return res.send({
     message: 'Updated Participant',

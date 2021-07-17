@@ -67,17 +67,24 @@ const getXats: RequestHandler = async (req, res) => {
       await Missatge.findById({ _id: element[3] })
         .then(async (response) => {
           await Participant.findById({ _id: response.participantID })
-            .then((resp) => {
-              // eslint-disable-next-line max-len
-              xatsFinals.push([
-                element[0],
-                element[1],
-                element[2],
-                response.text,
-                response.updatedAt,
-                resp.estudiantID,
-                'privs'
-              ]);
+            .then(async (resp) => {
+              await Participant.findOne({ estudiantID: id, xatID: element[0] })
+                .then((resp2) => {
+                  // eslint-disable-next-line max-len
+                  xatsFinals.push([
+                    element[0],
+                    element[1],
+                    element[2],
+                    response.text,
+                    response.updatedAt,
+                    resp.estudiantID,
+                    'privs',
+                    resp2.ultimaLectura
+                  ]);
+                })
+                .catch((e) => {
+                  console.error(e);
+                });
             })
             .catch((e) => {});
         })

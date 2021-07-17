@@ -7,10 +7,12 @@
 module.exports = (
   app: any,
   io: {
-    sockets: { adapter: { rooms: any } };
     on: (arg0: string, arg1: (socket: any) => void) => void;
-    emit: (arg0: string, arg1: any) => void;
-    to: (arg0: any) => { (): any; new (): any; emit: { (arg0: string, arg1: any, arg2: any): void; new (): any } };
+    to: (arg0: any) => {
+      (): any;
+      new (): any;
+      emit: { (arg0: string, arg1: undefined, arg2: undefined): void; new (): any };
+    };
   }
 ) => {
   io.on('connection', (socket) => {
@@ -26,6 +28,9 @@ module.exports = (
     });
     socket.on('refresh list', (message: any, nom: any, roomID: any) => {
       io.to(nom).emit('update message', message, roomID);
+    });
+    socket.on('new chat', (nom: any) => {
+      io.to(nom).emit('new chat', null, null);
     });
     socket.on('leave', (roomID: any) => {
       socket.leave(roomID);

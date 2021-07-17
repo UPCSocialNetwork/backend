@@ -1,24 +1,20 @@
-import {
-  Model, Schema, model
-} from 'mongoose';
-import TimeStampPlugin, {
-  ITimeStampedDocument
-} from './plugins/timestamp-plugin';
+import { Model, Schema, model } from 'mongoose';
+import TimeStampPlugin, { ITimeStampedDocument } from './plugins/timestamp-plugin';
 
 export interface IParticipant extends ITimeStampedDocument {
-    /** FK ID de l'estudiant */
-    estudiantID: string;
-    /** FK ID del xat */
-    xatID: string;
-    /** Temps de l'última lectura */
-    ultimaLectura: Number;
-    /** Indicador de notificacions */
-    notificacions: string;
-    /** Indicador de bloqueig */
-    bloqueigGrup: string;
-  }
+  /** FK ID de l'estudiant */
+  estudiantID: string;
+  /** FK ID del xat */
+  xatID: string;
+  /** Temps de l'última lectura */
+  ultimaLectura: number;
+  /** Indicador de notificacions */
+  notificacions: string;
+  /** Indicador de bloqueig */
+  bloqueigGrup: string;
+}
 
-  interface IParticipantModel extends Model<IParticipant> { }
+interface IParticipantModel extends Model<IParticipant> {}
 
 const schema = new Schema<IParticipant>({
   estudiantID: { type: String, required: true },

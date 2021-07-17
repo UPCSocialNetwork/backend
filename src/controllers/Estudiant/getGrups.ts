@@ -66,21 +66,28 @@ const getGrups: RequestHandler = async (req, res) => {
       await Missatge.findById({ _id: element[2] })
         .then(async (response) => {
           await Participant.findById({ _id: response.participantID })
-            .then((resp) => {
-              xatsFinals.push([
-                element[0],
-                element[3],
-                element[1],
-                response.text,
-                response.updatedAt,
-                resp.estudiantID,
-                element[4]
-              ]);
+            .then(async (resp) => {
+              await Participant.findOne({ estudiantID: id, xatID: element[0] })
+                .then((resp2) => {
+                  xatsFinals.push([
+                    element[0],
+                    element[3],
+                    element[1],
+                    response.text,
+                    response.updatedAt,
+                    resp.estudiantID,
+                    element[4],
+                    resp2.ultimaLectura
+                  ]);
+                })
+                .catch((e) => {
+                  console.error(e);
+                });
             })
             .catch((e) => {});
         })
         .catch(() => {
-          xatsFinals.push([element[0], element[3], element[1], 'Cap missatge', 404, '', element[4]]);
+          xatsFinals.push([element[0], element[3], element[1], 'Cap missatge', 404, '', element[4], 0]);
         });
     }
   } catch (e) {
