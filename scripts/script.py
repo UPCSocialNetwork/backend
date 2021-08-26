@@ -4,10 +4,10 @@ import collections
 from pymongo import MongoClient
 
 # Connexió a la base de dades
-db = MySQLdb.connect(host="147.83.250.104",
-                     user="xarxasocial",
-                     passwd="toh4ib9zoGaic3aiph",
-                     db="xarxasocial",
+db = MySQLdb.connect(host="-",
+                     user="-",
+                     passwd="-",
+                     db="-",
                      charset="utf8")
 cur = db.cursor()
 
